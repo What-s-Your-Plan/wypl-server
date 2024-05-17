@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: wypl
+  config:
+    import:
+      - security/application-jwt.yml
+      - security/application-logging.yml
+      - security/application-mongo.yml
+      - security/application-mysql.yml
+      - security/application-oauth.yml
+      - security/application-redis.yml
+      - security/application-s3.yml
+      - security/application-weather.yml
+    activate:
+      on-profile:
+        - default
+        - local
+        - dev
+        - blue
+        - green

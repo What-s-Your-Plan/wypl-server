@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: wypl
+  config:
+    import:
+      - security/application-h2.yml
+      - security/application-jwt.yml
+      - security/application-mongodb.yml
+      - security/application-oauth.yml
+      - security/application-redis.yml
+      - security/application-s3.yml
+      - security/application-weather.yml

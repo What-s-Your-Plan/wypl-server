@@ -1,0 +1,103 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Code Coverage Test" type="GradleRunConfiguration" factoryName="Gradle">
+    <ExternalSystemSettings>
+      <option name="executionName" />
+      <option name="externalProjectPath" value="$PROJECT_DIR$" />
+      <option name="externalSystemIdString" value="GRADLE" />
+      <option name="scriptParameters" value="" />
+      <option name="taskDescriptions">
+        <list />
+      </option>
+      <option name="taskNames">
+        <list>
+          <option value=":test" />
+        </list>
+      </option>
+      <option name="vmOptions" />
+    </ExternalSystemSettings>
+    <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+    <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+    <EXTENSION ID="com.intellij.execution.ExternalSystemRunConfigurationJavaExtension">
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.global.annotation.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.global.common.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.global.config.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.global.exception.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.auth.data.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.schedule.fixture.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.member.exception.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.member.fixture.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.label.fixture.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.infrastructure.exception.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.file.exception.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.auth.exception.*" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+        <pattern>
+          <option name="PATTERN" value="com.butter.wypl.WyplApplication" />
+          <option name="ENABLED" value="true" />
+          <option name="INCLUDE" value="false" />
+        </pattern>
+      </extension>
+      <extension name="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </extension>
+    </EXTENSION>
+    <DebugAllEnabled>false</DebugAllEnabled>
+    <RunAsTest>true</RunAsTest>
+    <method v="2" />
+  </configuration>
+</component>
