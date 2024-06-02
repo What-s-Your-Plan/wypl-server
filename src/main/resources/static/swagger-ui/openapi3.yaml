@@ -1,0 +1,4166 @@
+openapi: 3.0.1
+info:
+  title: What's Your Plan API Docs
+  description: What's Your Plan API Description
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:8080
+tags: []
+paths:
+  /auth/v1/logout:
+    delete:
+      tags:
+      - auth
+      operationId: auth/logout
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-action-notificationId-590174129'
+              examples:
+                auth/logout:
+                  value: |-
+                    {
+                      "message" : "로그아웃에 성공하였습니다."
+                    }
+  /auth/v1/reissue:
+    put:
+      tags:
+      - auth
+      operationId: auth/reissue
+      parameters:
+      - name: refresh_token
+        in: query
+        description: Refresh Token
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          description: "201"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/auth-v1-reissue-723021484'
+              examples:
+                auth/reissue:
+                  value: |-
+                    {
+                      "message" : "토큰 재발급에 성공하였습니다.",
+                      "body" : {
+                        "member_id" : 0,
+                        "access_token" : "at",
+                        "refresh_token" : "rt"
+                      }
+                    }
+  /auth/v1/sign-in/{provider}:
+    post:
+      tags:
+      - auth
+      operationId: auth/sign-in
+      parameters:
+      - name: provider
+        in: path
+        description: 소셜 로그인 제공자
+        required: true
+        schema:
+          type: string
+      - name: code
+        in: query
+        description: 인증 코드
+        required: true
+        schema:
+          type: string
+      responses:
+        "201":
+          description: "201"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/auth-v1-reissue-723021484'
+              examples:
+                auth/sign-in:
+                  value: |-
+                    {
+                      "message" : "로그인에 성공하였습니다.",
+                      "body" : {
+                        "member_id" : 0,
+                        "access_token" : "at",
+                        "refresh_token" : "rt"
+                      }
+                    }
+  /calendar/v1/calendars/years:
+    get:
+      tags:
+      - calendar
+      operationId: calendar/year
+      parameters:
+      - name: date
+        in: query
+        description: 기준 날짜
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/calendar-v1-calendars-years1330168621'
+              examples:
+                calendar/year:
+                  value: |-
+                    {
+                      "message" : "일년 달력 조회 성공",
+                      "body" : {
+                        "block_count" : 4,
+                        "blocks" : [ {
+                          "date" : "2024-05-06",
+                          "time" : 0
+                        }, {
+                          "date" : "2024-05-07",
+                          "time" : 660
+                        }, {
+                          "date" : "2024-05-08",
+                          "time" : 770
+                        }, {
+                          "date" : "2024-05-09",
+                          "time" : 0
+                        } ]
+                      }
+                    }
+  /calendar/v1/calendars/{type}:
+    get:
+      tags:
+      - calendar
+      operationId: calendar/personal
+      parameters:
+      - name: type
+        in: path
+        description: 캘린더 종류
+        required: true
+        schema:
+          type: string
+      - name: labelId
+        in: query
+        description: 원하는 라벨 id
+        required: false
+        schema:
+          type: string
+      - name: date
+        in: query
+        description: 기준 날짜
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/calendar-v1-calendars-type1395031786'
+              examples:
+                calendar/personal:
+                  value: |-
+                    {
+                      "message" : "개인 페이지 달력 조회 성공",
+                      "body" : {
+                        "schedule_count" : 2,
+                        "schedules" : [ {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-26T11:00:00",
+                          "end_date" : "2024-04-27T13:00:00",
+                          "title" : "테니스 가기",
+                          "description" : "장소 : 신촌 테니스",
+                          "category" : "MEMBER",
+                          "label" : null,
+                          "group" : null
+                        }, {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-27T11:00:00",
+                          "end_date" : "2024-04-27T12:00:00",
+                          "title" : "알고르즘 스터디",
+                          "description" : "하루에 한문제씩 풀기",
+                          "category" : "GROUP",
+                          "label" : null,
+                          "group" : {
+                            "group_id" : 0,
+                            "color" : "labelBlue",
+                            "title" : "study group"
+                          }
+                        } ]
+                      }
+                    }
+                calendar/personal_label_date:
+                  value: |-
+                    {
+                      "message" : "개인 페이지 달력 조회 성공",
+                      "body" : {
+                        "schedule_count" : 2,
+                        "schedules" : [ {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-27T11:00:00",
+                          "end_date" : "2024-04-28T13:00:00",
+                          "title" : "테니스 가기",
+                          "description" : "장소 : 신촌 테니스",
+                          "category" : "MEMBER",
+                          "label" : {
+                            "label_id" : 0,
+                            "member_id" : 1,
+                            "title" : "알고리즘 스터디",
+                            "color" : "labelCharcoal"
+                          },
+                          "group" : null
+                        }, {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-26T11:00:00",
+                          "end_date" : "2024-04-27T12:00:00",
+                          "title" : "알고르즘 스터디",
+                          "description" : "하루에 한문제씩 풀기",
+                          "category" : "GROUP",
+                          "label" : {
+                            "label_id" : 0,
+                            "member_id" : 1,
+                            "title" : "알고리즘 스터디",
+                            "color" : "labelCharcoal"
+                          },
+                          "group" : {
+                            "group_id" : 0,
+                            "color" : "labelBlue",
+                            "title" : "study group"
+                          }
+                        } ]
+                      }
+                    }
+                calendar/personal_date:
+                  value: |-
+                    {
+                      "message" : "개인 페이지 달력 조회 성공",
+                      "body" : {
+                        "schedule_count" : 2,
+                        "schedules" : [ {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-26T11:00:00",
+                          "end_date" : "2024-04-27T13:00:00",
+                          "title" : "테니스 가기",
+                          "description" : "장소 : 신촌 테니스",
+                          "category" : "MEMBER",
+                          "label" : null,
+                          "group" : null
+                        }, {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-27T11:00:00",
+                          "end_date" : "2024-04-27T12:00:00",
+                          "title" : "알고르즘 스터디",
+                          "description" : "하루에 한문제씩 풀기",
+                          "category" : "GROUP",
+                          "label" : null,
+                          "group" : {
+                            "group_id" : 0,
+                            "color" : "labelBlue",
+                            "title" : "study group"
+                          }
+                        } ]
+                      }
+                    }
+                calendar/personal_label:
+                  value: |-
+                    {
+                      "message" : "개인 페이지 달력 조회 성공",
+                      "body" : {
+                        "schedule_count" : 2,
+                        "schedules" : [ {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-27T11:00:00",
+                          "end_date" : "2024-04-28T13:00:00",
+                          "title" : "테니스 가기",
+                          "description" : "장소 : 신촌 테니스",
+                          "category" : "MEMBER",
+                          "label" : {
+                            "label_id" : 0,
+                            "member_id" : 1,
+                            "title" : "알고리즘 스터디",
+                            "color" : "labelCharcoal"
+                          },
+                          "group" : null
+                        }, {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-26T11:00:00",
+                          "end_date" : "2024-04-27T12:00:00",
+                          "title" : "알고르즘 스터디",
+                          "description" : "하루에 한문제씩 풀기",
+                          "category" : "GROUP",
+                          "label" : {
+                            "label_id" : 0,
+                            "member_id" : 1,
+                            "title" : "알고리즘 스터디",
+                            "color" : "labelCharcoal"
+                          },
+                          "group" : {
+                            "group_id" : 0,
+                            "color" : "labelBlue",
+                            "title" : "study group"
+                          }
+                        } ]
+                      }
+                    }
+  /calendar/v1/calendars/{type}/{groupId}:
+    get:
+      tags:
+      - calendar
+      operationId: calendar/group
+      parameters:
+      - name: type
+        in: path
+        description: 캘린더 종류
+        required: true
+        schema:
+          type: string
+      - name: groupId
+        in: path
+        description: 그룹 인덱스
+        required: true
+        schema:
+          type: string
+      - name: date
+        in: query
+        description: 기준 날짜
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/calendar-v1-calendars-type-groupId1204135838'
+              examples:
+                calendar/group:
+                  value: |-
+                    {
+                      "message" : "그룹 페이지 달력 조회 성공",
+                      "body" : {
+                        "schedule_count" : 2,
+                        "group" : {
+                          "group_id" : 0,
+                          "color" : "labelBlue",
+                          "title" : "study group"
+                        },
+                        "schedules" : [ {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-27T11:00:00",
+                          "end_date" : "2024-04-28T13:00:00",
+                          "member_count" : 1,
+                          "title" : "테니스 가기",
+                          "category" : "MEMBER",
+                          "members" : [ {
+                            "member_id" : 0,
+                            "nickname" : "좌랑둥이",
+                            "color" : "labelCharcoal"
+                          } ]
+                        }, {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-26T11:00:00",
+                          "end_date" : "2024-04-27T12:00:00",
+                          "member_count" : 2,
+                          "title" : "알고르즘 스터디",
+                          "category" : "GROUP",
+                          "members" : [ {
+                            "member_id" : 0,
+                            "nickname" : "좌랑둥이",
+                            "color" : "labelCharcoal"
+                          }, {
+                            "member_id" : 0,
+                            "nickname" : "댬니",
+                            "color" : "labelBlue"
+                          } ]
+                        } ]
+                      }
+                    }
+                calendar/group_date:
+                  value: |-
+                    {
+                      "message" : "그룹 페이지 달력 조회 성공",
+                      "body" : {
+                        "schedule_count" : 2,
+                        "group" : {
+                          "group_id" : 0,
+                          "color" : "labelBlue",
+                          "title" : "study group"
+                        },
+                        "schedules" : [ {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-27T11:00:00",
+                          "end_date" : "2024-04-28T13:00:00",
+                          "member_count" : 1,
+                          "title" : "테니스 가기",
+                          "category" : "MEMBER",
+                          "members" : [ {
+                            "member_id" : 0,
+                            "nickname" : "좌랑둥이",
+                            "color" : "labelCharcoal"
+                          } ]
+                        }, {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-26T11:00:00",
+                          "end_date" : "2024-04-27T12:00:00",
+                          "member_count" : 2,
+                          "title" : "알고르즘 스터디",
+                          "category" : "GROUP",
+                          "members" : [ {
+                            "member_id" : 0,
+                            "nickname" : "좌랑둥이",
+                            "color" : "labelCharcoal"
+                          }, {
+                            "member_id" : 0,
+                            "nickname" : "댬니",
+                            "color" : "labelBlue"
+                          } ]
+                        } ]
+                      }
+                    }
+  /file/v1/images:
+    post:
+      tags:
+      - file
+      operationId: file/upload-image
+      responses:
+        "201":
+          description: "201"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/file-v1-images-843780732'
+              examples:
+                file/upload-image:
+                  value: |-
+                    {
+                      "message" : "사진 저장에 성공하였습니다.",
+                      "body" : {
+                        "image_url" : "aws.image.url"
+                      }
+                    }
+  /group/v1/groups:
+    post:
+      tags:
+      - group
+      operationId: group/create-group
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/group-v1-groups-2118240443'
+            examples:
+              group/create-group:
+                value: |-
+                  {
+                    "member_id_list" : [ 2, 3 ],
+                    "name" : "group1",
+                    "color" : "labelNavy"
+                  }
+      responses:
+        "201":
+          description: "201"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group-v1-groups-groupId-2021476588'
+              examples:
+                group/create-group:
+                  value: |-
+                    {
+                      "message" : "그룹 등록에 성공했습니다.",
+                      "body" : {
+                        "id" : 1,
+                        "name" : "group1",
+                        "color" : "labelNavy"
+                      }
+                    }
+  /group/v1/groups/members:
+    get:
+      tags:
+      - group
+      operationId: group/get-groups-by-member-id
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group-v1-groups-members-1943332542'
+              examples:
+                group/get-groups-by-member-id:
+                  value: |-
+                    {
+                      "message" : "회원의 그룹 전체 조회에 성공했습니다.",
+                      "body" : {
+                        "group_count" : 1,
+                        "invited_group_count" : 1,
+                        "invited_groups" : [ {
+                          "id" : 0,
+                          "name" : "work group",
+                          "color" : "labelYellow",
+                          "is_owner" : true
+                        } ],
+                        "groups" : [ {
+                          "id" : 0,
+                          "name" : "study group",
+                          "color" : "labelYellow",
+                          "is_owner" : true
+                        } ]
+                      }
+                    }
+  /group/v1/groups/{groupId}:
+    get:
+      tags:
+      - group
+      operationId: group/get-detail-group
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group-v1-groups-groupId-1709623646'
+              examples:
+                group/get-detail-group:
+                  value: |-
+                    {
+                      "message" : "그룹 조회에 성공했습니다.",
+                      "body" : {
+                        "member_count" : 3,
+                        "members" : [ {
+                          "is_accepted" : false,
+                          "id" : 1,
+                          "email" : "jiwons0803@naver.com",
+                          "nickname" : "지롱이"
+                        }, {
+                          "profile_image" : "new.profile.image",
+                          "is_accepted" : false,
+                          "id" : 2,
+                          "email" : "workju1124@gmail.com",
+                          "nickname" : "김세이"
+                        }, {
+                          "is_accepted" : true,
+                          "id" : 3,
+                          "email" : "thdus981005@naver.com",
+                          "nickname" : "좌랑둥이"
+                        } ],
+                        "color" : "labelBrown"
+                      }
+                    }
+    delete:
+      tags:
+      - group
+      operationId: group/delete-group
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-action-notificationId-590174129'
+              examples:
+                group/delete-group:
+                  value: |-
+                    {
+                      "message" : "그룹 삭제에 성공했습니다."
+                    }
+    patch:
+      tags:
+      - group
+      operationId: group/update-group
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/group-v1-groups-groupId2024631656'
+            examples:
+              group/update-group:
+                value: |-
+                  {
+                    "name" : "업데이트 할 그룹명",
+                    "color" : "labelBrown"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group-v1-groups-groupId-2021476588'
+              examples:
+                group/update-group:
+                  value: |-
+                    {
+                      "message" : "그룹 수정에 성공했습니다.",
+                      "body" : {
+                        "id" : 1,
+                        "name" : "업데이트 할 그룹명",
+                        "color" : "labelBrown"
+                      }
+                    }
+  /group/v1/groups/{groupId}/members:
+    delete:
+      tags:
+      - group
+      operationId: group/leave-group
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-action-notificationId-590174129'
+              examples:
+                group/leave-group:
+                  value: |-
+                    {
+                      "message" : "그룹을 탈퇴했습니다."
+                    }
+  /group/v1/groups/{groupId}/members/colors:
+    patch:
+      tags:
+      - group
+      operationId: group/member-group/update-color
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/group-v1-groups-groupId-members-colors1825655985'
+            examples:
+              group/member-group/update-color:
+                value: |-
+                  {
+                    "color" : "labelNavy"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group-v1-groups-groupId-members-colors-1393652192'
+              examples:
+                group/member-group/update-color:
+                  value: |-
+                    {
+                      "message" : "그룹 개인화 색상 변경에 성공했습니다.",
+                      "body" : {
+                        "color" : "labelNavy"
+                      }
+                    }
+  /group/v1/groups/{groupId}/members/force-out:
+    patch:
+      tags:
+      - group
+      operationId: group/group-member/force-out
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/group-v1-groups-groupId-members-force-out-674408473'
+            examples:
+              group/group-member/force-out:
+                value: |-
+                  {
+                    "member_id" : 2
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group-v1-groups-groupId-members-force-out-100813394'
+              examples:
+                group/group-member/force-out:
+                  value: |-
+                    {
+                      "message" : "그룹 멤버 강제 탈퇴에 성공했습니다.",
+                      "body" : {
+                        "member_id" : 2
+                      }
+                    }
+  /group/v1/groups/{groupId}/members/invitation:
+    post:
+      tags:
+      - group
+      operationId: group/invite-group-member
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/group-v1-groups-groupId-members-invitation1210620785'
+            examples:
+              group/invite-group-member:
+                value: |-
+                  {
+                    "member_id_list" : [ 3, 2 ]
+                  }
+      responses:
+        "201":
+          description: "201"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/group-v1-groups-groupId-members-invitation-2048567868'
+              examples:
+                group/invite-group-member:
+                  value: |-
+                    {
+                      "message" : "그룹 멤버 초대에 성공했습니다.",
+                      "body" : {
+                        "group_id" : 1
+                      }
+                    }
+    delete:
+      tags:
+      - group
+      operationId: group/accept-group-invitation
+      parameters:
+      - name: groupId
+        in: path
+        description: 그룹 식별자
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-action-notificationId-590174129'
+              examples:
+                group/accept-group-invitation:
+                  value: |-
+                    {
+                      "message" : "그룹 멤버 초대를 거절했습니다."
+                    }
+  /label/v1/labels:
+    get:
+      tags:
+      - label
+      operationId: label/getLabels
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/label-v1-labels-664349313'
+              examples:
+                label/getLabels:
+                  value: |-
+                    {
+                      "message" : "멤버 id로 라벨 리스트 조회 성공",
+                      "body" : {
+                        "label_count" : 2,
+                        "labels" : [ {
+                          "label_id" : 0,
+                          "member_id" : 1,
+                          "title" : "알고리즘 스터디",
+                          "color" : "labelCharcoal"
+                        }, {
+                          "label_id" : 0,
+                          "member_id" : 1,
+                          "title" : "운동",
+                          "color" : "labelCharcoal"
+                        } ]
+                      }
+                    }
+    post:
+      tags:
+      - label
+      operationId: label/create
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/label-v1-labels526348895'
+            examples:
+              label/create:
+                value: |-
+                  {
+                    "title" : "알고리즘 스터디",
+                    "color" : "labelCharcoal"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/label-v1-labels942183226'
+              examples:
+                label/create:
+                  value: |-
+                    {
+                      "message" : "라벨 생성 성공",
+                      "body" : {
+                        "label_id" : 1,
+                        "member_id" : 1,
+                        "title" : "알고리즘 스터디",
+                        "color" : "labelCharcoal"
+                      }
+                    }
+  /label/v1/labels/main:
+    get:
+      tags:
+      - label
+      operationId: label/getAllLabel
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/label-v1-labels-main102750181'
+              examples:
+                label/getAllLabel:
+                  value: |-
+                    {
+                      "message" : "라벨+그룹 조회 성공",
+                      "body" : {
+                        "label_count" : 2,
+                        "labels" : [ {
+                          "id" : 0,
+                          "category" : "MEMBER",
+                          "title" : "알고리즘 스터디",
+                          "color" : "labelCharcoal"
+                        }, {
+                          "id" : 0,
+                          "category" : "GROUP",
+                          "title" : "work group",
+                          "color" : "labelYellow"
+                        } ]
+                      }
+                    }
+  /label/v1/labels/{labelId}:
+    get:
+      tags:
+      - label
+      operationId: label/getLabel
+      parameters:
+      - name: labelId
+        in: path
+        description: 라벨 id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/label-v1-labels-labelId154821834'
+              examples:
+                label/getLabel:
+                  value: |-
+                    {
+                      "message" : "라벨 id로 라벨 조회 성공",
+                      "body" : {
+                        "label_id" : 1,
+                        "member_id" : 1,
+                        "title" : "알고리즘 스터디",
+                        "color" : "labelCharcoal"
+                      }
+                    }
+    patch:
+      tags:
+      - label
+      operationId: label/update
+      parameters:
+      - name: labelId
+        in: path
+        description: 라벨 id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/label-v1-labels526348895'
+            examples:
+              label/update:
+                value: |-
+                  {
+                    "title" : "알고리즘 스터디",
+                    "color" : "labelCharcoal"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/label-v1-labels-labelId-1387906680'
+              examples:
+                label/update:
+                  value: |-
+                    {
+                      "message" : "라벨 수정 성공",
+                      "body" : {
+                        "label_id" : 1,
+                        "member_id" : 1,
+                        "title" : "알고리즘 스터디",
+                        "color" : "labelCharcoal"
+                      }
+                    }
+  /member/v1/members:
+    get:
+      tags:
+      - member
+      operationId: member/search-members
+      parameters:
+      - name: q
+        in: query
+        description: 검색 대상의 이메일
+        required: true
+        schema:
+          type: string
+      - name: size
+        in: query
+        description: 검색 요청의 데이터 건수
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members2084348635'
+              examples:
+                member/search-members:
+                  value: |-
+                    {
+                      "message" : "사용자들을 조회했습니다",
+                      "body" : {
+                        "members" : [ {
+                          "id" : 1,
+                          "email" : "workju1124@gmail.com",
+                          "nickname" : "김세이",
+                          "profile_image_url" : "image_url_1"
+                        }, {
+                          "id" : 2,
+                          "email" : "jdm080620@gmail.com",
+                          "nickname" : "댬니",
+                          "profile_image_url" : "image_url_2"
+                        }, {
+                          "id" : 3,
+                          "email" : "thdus981005@naver.com",
+                          "nickname" : "좌랑둥이",
+                          "profile_image_url" : "image_url_3"
+                        }, {
+                          "id" : 4,
+                          "email" : "hitobi1014@gmail.com",
+                          "nickname" : "모코코",
+                          "profile_image_url" : "image_url_4"
+                        }, {
+                          "id" : 5,
+                          "email" : "leeji7031@gmail.com",
+                          "nickname" : "뚱이",
+                          "profile_image_url" : "image_url_5"
+                        }, {
+                          "id" : 6,
+                          "email" : "jiwons0803@naver.com",
+                          "nickname" : "지롱이",
+                          "profile_image_url" : "image_url_6"
+                        } ],
+                        "member_count" : 6
+                      }
+                    }
+  /member/v1/timezones:
+    get:
+      tags:
+      - member
+      operationId: member/timezones
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-timezones1715234499'
+              examples:
+                member/timezones:
+                  value: |-
+                    {
+                      "message" : "타임존을 조회하였습니다.",
+                      "body" : {
+                        "member_timezone" : "KOREA",
+                        "timezones" : [ "KOREA", "WEST_USA", "EAST_USA", "ENGLAND" ],
+                        "timezone_count" : 4
+                      }
+                    }
+  /member/v1/members/birthday:
+    patch:
+      tags:
+      - member
+      operationId: member/update-birthday
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/member-v1-members-birthday-891976851'
+            examples:
+              member/update-birthday:
+                value: |-
+                  {
+                    "birthday" : "1998-11-24"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members-birthday1331023449'
+              examples:
+                member/update-birthday:
+                  value: |-
+                    {
+                      "message" : "생일을 수정하였습니다",
+                      "body" : {
+                        "birthday" : "1998-11-24",
+                        "birthday_as_string" : "1998년 11월 24일"
+                      }
+                    }
+  /member/v1/members/colors:
+    get:
+      tags:
+      - member
+      operationId: member/find-color
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members-colors710220484'
+              examples:
+                member/find-color:
+                  value: |-
+                    {
+                      "message" : "컬러를 조회했습니다.",
+                      "body" : {
+                        "color_count" : 14,
+                        "select_color" : "labelBrown",
+                        "colors" : [ "labelRed", "labelPink", "labelOrange", "labelYellow", "labelGreen", "labelLeaf", "labelBlue", "labelSky", "labelNavy", "labelIndigo", "labelPurple", "labelLavender", "labelCharcoal", "labelBrown" ]
+                      }
+                    }
+    patch:
+      tags:
+      - member
+      operationId: member/update-color
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/member-v1-members-colors667278139'
+            examples:
+              member/update-color:
+                value: |-
+                  {
+                    "color" : "labelLavender"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members-colors807170801'
+              examples:
+                member/update-color:
+                  value: |-
+                    {
+                      "message" : "컬러를 수정하였습니다.",
+                      "body" : {
+                        "color" : "labelLavender"
+                      }
+                    }
+  /member/v1/members/nickname:
+    patch:
+      tags:
+      - member
+      operationId: member/update-nickname
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/member-v1-members-nickname-2080570654'
+            examples:
+              member/update-nickname:
+                value: |-
+                  {
+                    "nickname" : "wypl"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members-nickname-139893332'
+              examples:
+                member/update-nickname:
+                  value: |-
+                    {
+                      "message" : "닉네임을 수정하였습니다.",
+                      "body" : {
+                        "nickname" : "wypl"
+                      }
+                    }
+  /member/v1/members/profile-image:
+    post:
+      tags:
+      - member
+      operationId: member/update-profile-image
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members-profile-image533018051'
+              examples:
+                member/update-profile-image:
+                  value: |-
+                    {
+                      "message" : "프로필 이미지를 수정했습니다.",
+                      "body" : {
+                        "profile_image_url" : "aws.image.url"
+                      }
+                    }
+  /member/v1/members/timezones:
+    patch:
+      tags:
+      - member
+      operationId: member/update-timezone
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/member-v1-members-timezones-432436010'
+            examples:
+              member/update-timezone:
+                value: |-
+                  {
+                    "timezone" : "ENGLAND"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members-timezones-926334236'
+              examples:
+                member/update-timezone:
+                  value: |-
+                    {
+                      "message" : "타임존을 수정하였습니다.",
+                      "body" : {
+                        "timezone" : "ENGLAND"
+                      }
+                    }
+  /member/v1/members/{member_id}:
+    get:
+      tags:
+      - member
+      operationId: member/profile
+      parameters:
+      - name: member_id
+        in: path
+        description: ""
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/member-v1-members-member_id-335746078'
+              examples:
+                member/profile:
+                  value: |-
+                    {
+                      "message" : "프로필 조회하였습니다.",
+                      "body" : {
+                        "id" : 0,
+                        "email" : "workju1124@gmail.com",
+                        "nickname" : "김세이",
+                        "profile_image_url" : "profile_url",
+                        "main_color" : "labelBrown"
+                      }
+                    }
+  /notification/v1/notifications:
+    get:
+      tags:
+      - notification
+      operationId: notification
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-872507205'
+              examples:
+                notification:
+                  value: |-
+                    {
+                      "message" : "알림 조회 성공",
+                      "body" : {
+                        "notifications" : [ {
+                          "id" : "abcdefg1",
+                          "member_id" : 1,
+                          "message" : "모코코님 운동 일정은 어떠셨나요?",
+                          "is_read" : false,
+                          "is_acted" : false,
+                          "type_code" : "REVIEW",
+                          "target_id" : 0
+                        }, {
+                          "id" : "abcdefg2",
+                          "member_id" : 1,
+                          "message" : "모코코님 운동 일정은 어떠셨나요?",
+                          "is_read" : true,
+                          "is_acted" : false,
+                          "type_code" : "REVIEW",
+                          "target_id" : 0
+                        }, {
+                          "id" : "abcdefg3",
+                          "member_id" : 1,
+                          "message" : "A602 팀 초대가 왔어요",
+                          "is_read" : true,
+                          "is_acted" : false,
+                          "type_code" : "GROUP",
+                          "target_id" : 0
+                        } ],
+                        "last_id" : "abcdefg3",
+                        "total_notification_count" : 3,
+                        "total_page_count" : 1,
+                        "has_next" : false,
+                        "page_size" : 10
+                      }
+                    }
+    delete:
+      tags:
+      - notification
+      operationId: notification/delete
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-action-notificationId-590174129'
+              examples:
+                notification/delete:
+                  value: |-
+                    {
+                      "message" : "회원 알림 전체 삭제 성공"
+                    }
+  /notification/v1/notifications/action/{notificationId}:
+    patch:
+      tags:
+      - notification
+      operationId: notification/update-action
+      parameters:
+      - name: notificationId
+        in: path
+        description: ""
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-action-notificationId-590174129'
+              examples:
+                notification/update-action:
+                  value: |-
+                    {
+                      "message" : "알림 isActed True 처리 성공"
+                    }
+  /review/v1/reviews:
+    post:
+      tags:
+      - review
+      operationId: review/create
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/review-v1-reviews-1576008846'
+            examples:
+              review/create:
+                value: |-
+                  {
+                    "schedule_id" : 0,
+                    "title" : "공부하기 싫다",
+                    "contents" : [ {
+                      "emoji" : "/src/assets/icons/emoji/tired.svg",
+                      "description" : "피곤해요",
+                      "blockType" : "emotion"
+                    }, {
+                      "weather" : "/src/assets/icons/weather/sun.svg",
+                      "description" : "날씨 너무 좋음",
+                      "blockType" : "4f"
+                    }, {
+                      "blockType" : "4f",
+                      "feelings" : "느낌",
+                      "facts" : "팩트",
+                      "future" : "향후 헹동",
+                      "finding" : "교훈"
+                    } ]
+                  }
+      responses:
+        "201":
+          description: "201"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/review-v1-reviews-1465059799'
+              examples:
+                review/create:
+                  value: |-
+                    {
+                      "message" : "리뷰 등록에 성공했습니다.",
+                      "body" : {
+                        "review_id" : 1
+                      }
+                    }
+  /review/v1/reviews/{reviewId}:
+    delete:
+      tags:
+      - review
+      operationId: review/delete
+      parameters:
+      - name: reviewId
+        in: path
+        description: 리뷰 id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/review-v1-reviews-reviewId-2055704970'
+              examples:
+                review/delete:
+                  value: |-
+                    {
+                      "message" : "리뷰 삭제에 성공 했습니다.",
+                      "body" : {
+                        "review_id" : 1
+                      }
+                    }
+    patch:
+      tags:
+      - review
+      operationId: review/update
+      parameters:
+      - name: reviewId
+        in: path
+        description: 수정할 리뷰 인덱스
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/review-v1-reviews-1576008846'
+            examples:
+              review/update:
+                value: |-
+                  {
+                    "schedule_id" : 0,
+                    "title" : "공부하기 싫다",
+                    "contents" : [ {
+                      "emoji" : "/src/assets/icons/emoji/tired.svg",
+                      "description" : "피곤해요",
+                      "blockType" : "emotion"
+                    }, {
+                      "weather" : "/src/assets/icons/weather/sun.svg",
+                      "description" : "날씨 너무 좋음",
+                      "blockType" : "4f"
+                    }, {
+                      "blockType" : "4f",
+                      "feelings" : "느낌",
+                      "facts" : "팩트",
+                      "future" : "향후 헹동",
+                      "finding" : "교훈"
+                    } ]
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/review-v1-reviews-reviewId-2055704970'
+              examples:
+                review/update:
+                  value: |-
+                    {
+                      "message" : "리뷰 수정에 성공했습니다.",
+                      "body" : {
+                        "review_id" : 1
+                      }
+                    }
+  /review/v1/reviews/{type}:
+    get:
+      tags:
+      - review
+      operationId: review/getReviewsByMember
+      parameters:
+      - name: type
+        in: path
+        description: 최신순 or 오래된 순
+        required: true
+        schema:
+          type: string
+      - name: lastReviewId
+        in: query
+        description: 가장 나중에 조회한 회고 인덱스
+        required: false
+        schema:
+          type: string
+      - name: startDate
+        in: query
+        description: 시작 기준일
+        required: false
+        schema:
+          type: string
+      - name: endDate
+        in: query
+        description: 끝 기준일
+        required: false
+        schema:
+          type: string
+      - name: date
+        in: query
+        description: 기준 날짜
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/review-v1-reviews-type-1001641780'
+              examples:
+                review/getReviewsByMember:
+                  value: |-
+                    {
+                      "message" : "리뷰 목록 조회에 성공했습니다.",
+                      "body" : {
+                        "review_count" : 2,
+                        "reviews" : [ {
+                          "review_id" : 0,
+                          "created_at" : "2024-06-03T01:44:11.960071",
+                          "thumbnail_content" : {
+                            "emoji" : "/src/assets/icons/emoji/tired.svg",
+                            "description" : "피곤해요",
+                            "blockType" : "emotion"
+                          },
+                          "title" : "공부하기 싫다"
+                        }, {
+                          "review_id" : 0,
+                          "created_at" : "2024-06-03T01:44:11.960083",
+                          "thumbnail_content" : {
+                            "weather" : "/src/assets/icons/weather/sun.svg",
+                            "description" : "날씨 너무 좋음",
+                            "blockType" : "4f"
+                          },
+                          "title" : "오늘도 공부하기 싫다"
+                        } ]
+                      }
+                    }
+  /review/v1/reviews/detail/{reviewId}:
+    get:
+      tags:
+      - review
+      operationId: review/getDetailReview
+      parameters:
+      - name: reviewId
+        in: path
+        description: 리뷰 id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/review-v1-reviews-detail-reviewId603208797'
+              examples:
+                review/getDetailReview:
+                  value: |-
+                    {
+                      "message" : "리뷰 상세 조회에 성공했습니다.",
+                      "body" : {
+                        "review_id" : 0,
+                        "title" : "공부하기 싫다",
+                        "schedule" : {
+                          "schedule_id" : 0,
+                          "start_date" : "2024-04-26T11:00:00",
+                          "end_date" : "2024-04-27T13:00:00",
+                          "group_id" : null,
+                          "label" : null,
+                          "member_count" : 1,
+                          "title" : "테니스 가기",
+                          "description" : "장소 : 신촌 테니스",
+                          "category" : "MEMBER",
+                          "members" : [ {
+                            "member_id" : 0,
+                            "profile_image" : null,
+                            "nickname" : "좌랑둥이"
+                          } ]
+                        },
+                        "contents" : [ {
+                          "emoji" : "/src/assets/icons/emoji/tired.svg",
+                          "description" : "피곤해요",
+                          "blockType" : "emotion"
+                        }, {
+                          "weather" : "/src/assets/icons/weather/sun.svg",
+                          "description" : "날씨 너무 좋음",
+                          "blockType" : "4f"
+                        }, {
+                          "blockType" : "4f",
+                          "feelings" : "느낌",
+                          "facts" : "팩트",
+                          "future" : "향후 헹동",
+                          "finding" : "교훈"
+                        } ]
+                      }
+                    }
+  /schedule/v1/schedules:
+    post:
+      tags:
+      - schedule
+      operationId: schedule/createSchedule
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/schedule-v1-schedules-2143806923'
+            examples:
+              schedule/createSchedule:
+                value: |-
+                  {
+                    "start_date" : "2024-04-25T11:00:00",
+                    "end_date" : "2024-04-25T12:00:00",
+                    "group_id" : null,
+                    "label_id" : 0,
+                    "title" : "헬스장 가기",
+                    "description" : null,
+                    "category" : "MEMBER",
+                    "repetition" : {
+                      "repetition_cycle" : "WEEK",
+                      "repetition_start_date" : "2024-04-25",
+                      "repetition_end_date" : "2025-04-25",
+                      "day_of_week" : 2,
+                      "week" : 1
+                    },
+                    "members" : [ {
+                      "member_id" : 1
+                    } ]
+                  }
+      responses:
+        "201":
+          description: "201"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule-v1-schedules-scheduleId1157950338'
+              examples:
+                schedule/createSchedule:
+                  value: |-
+                    {
+                      "message" : "일정 생성 성공",
+                      "body" : {
+                        "schedule_id" : 0,
+                        "start_date" : "2024-04-25T11:00:00",
+                        "end_date" : "2024-04-25T12:00:00",
+                        "group_id" : null,
+                        "label" : {
+                          "label_id" : 0,
+                          "member_id" : 1,
+                          "title" : "알고리즘 스터디",
+                          "color" : "labelCharcoal"
+                        },
+                        "member_count" : 1,
+                        "title" : "헬스장 가기",
+                        "description" : null,
+                        "category" : "MEMBER",
+                        "repetition" : {
+                          "repetition_id" : 0,
+                          "repetition_cycle" : "WEEK",
+                          "repetition_start_date" : "2024-04-25",
+                          "repetition_end_date" : "2025-04-25",
+                          "day_of_week" : 2,
+                          "week" : 1
+                        },
+                        "members" : [ {
+                          "member_id" : 1,
+                          "profile_image" : null,
+                          "nickname" : "좌랑둥이"
+                        } ]
+                      }
+                    }
+  /schedule/v1/schedules/{scheduleId}:
+    get:
+      tags:
+      - schedule
+      operationId: schedule/getSchedule
+      parameters:
+      - name: scheduleId
+        in: path
+        description: 스케줄 id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule-v1-schedules-scheduleId1840727101'
+              examples:
+                schedule/getSchedule:
+                  value: |-
+                    {
+                      "message" : "간략 일정 조회 성공",
+                      "body" : {
+                        "schedule_id" : 0,
+                        "start_date" : "2024-04-26T11:00:00",
+                        "end_date" : "2024-04-27T12:00:00",
+                        "group_id" : 1,
+                        "label" : {
+                          "label_id" : 0,
+                          "member_id" : 1,
+                          "title" : "알고리즘 스터디",
+                          "color" : "labelCharcoal"
+                        },
+                        "member_count" : 2,
+                        "title" : "알고르즘 스터디",
+                        "description" : "하루에 한문제씩 풀기",
+                        "category" : "GROUP",
+                        "members" : [ {
+                          "member_id" : 1,
+                          "profile_image" : null,
+                          "nickname" : "좌랑둥이"
+                        }, {
+                          "member_id" : 2,
+                          "profile_image" : null,
+                          "nickname" : "댬니"
+                        } ]
+                      }
+                    }
+    put:
+      tags:
+      - schedule
+      operationId: schedule/updateSchedule
+      parameters:
+      - name: scheduleId
+        in: path
+        description: 스케줄 id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/schedule-v1-schedules-scheduleId-971847230'
+            examples:
+              schedule/updateSchedule:
+                value: |-
+                  {
+                    "start_date" : "2024-04-27T11:00:00",
+                    "end_date" : "2024-04-28T13:00:00",
+                    "group_id" : null,
+                    "label_id" : 0,
+                    "title" : "테니스 가기",
+                    "description" : "장소 : 신촌 테니스",
+                    "category" : "MEMBER",
+                    "repetition" : null,
+                    "members" : [ {
+                      "member_id" : 1
+                    } ]
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule-v1-schedules-scheduleId1157950338'
+              examples:
+                schedule/updateSchedule:
+                  value: |-
+                    {
+                      "message" : "일정 수정 성공",
+                      "body" : {
+                        "schedule_id" : 0,
+                        "start_date" : "2024-04-27T11:00:00",
+                        "end_date" : "2024-04-28T13:00:00",
+                        "group_id" : null,
+                        "label" : {
+                          "label_id" : 0,
+                          "member_id" : 1,
+                          "title" : "알고리즘 스터디",
+                          "color" : "labelCharcoal"
+                        },
+                        "member_count" : 1,
+                        "title" : "테니스 가기",
+                        "description" : "장소 : 신촌 테니스",
+                        "category" : "MEMBER",
+                        "repetition" : null,
+                        "members" : [ {
+                          "member_id" : 1,
+                          "profile_image" : null,
+                          "nickname" : "좌랑둥이"
+                        } ]
+                      }
+                    }
+  /schedule/v1/schedules/details/{scheduleId}:
+    get:
+      tags:
+      - schedule
+      operationId: schedule/getDetailSchedule
+      parameters:
+      - name: scheduleId
+        in: path
+        description: 스케줄 id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule-v1-schedules-details-scheduleId-1553930942'
+              examples:
+                schedule/getDetailSchedule:
+                  value: |-
+                    {
+                      "message" : "상세 일정 조회 성공",
+                      "body" : {
+                        "schedule_id" : 0,
+                        "start_date" : "2024-04-25T11:00:00",
+                        "end_date" : "2024-04-25T12:00:00",
+                        "group_id" : null,
+                        "label" : {
+                          "label_id" : 0,
+                          "member_id" : 1,
+                          "title" : "알고리즘 스터디",
+                          "color" : "labelCharcoal"
+                        },
+                        "member_count" : 1,
+                        "title" : "헬스장 가기",
+                        "description" : null,
+                        "category" : "MEMBER",
+                        "repetition" : {
+                          "repetition_id" : 0,
+                          "repetition_cycle" : "WEEK",
+                          "repetition_start_date" : "2024-04-25",
+                          "repetition_end_date" : "2025-04-25",
+                          "day_of_week" : 2,
+                          "week" : 1
+                        },
+                        "members" : [ {
+                          "member_id" : 1,
+                          "profile_image" : null,
+                          "nickname" : "좌랑둥이"
+                        } ]
+                      }
+                    }
+  /schedule/v1/schedules/{scheduleId}/{modificationType}:
+    delete:
+      tags:
+      - schedule
+      operationId: label/deleteLabel
+      parameters:
+      - name: scheduleId
+        in: path
+        description: 일정 id
+        required: true
+        schema:
+          type: string
+      - name: modificationType
+        in: path
+        description: 변환 타입
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/schedule-v1-schedules-scheduleId-modificationType1075432245'
+              examples:
+                label/deleteLabel:
+                  value: |-
+                    {
+                      "message" : "일정 삭제 성공",
+                      "body" : {
+                        "schedule_count" : 2,
+                        "schedules" : [ {
+                          "schedule_id" : 1
+                        }, {
+                          "schedule_id" : 2
+                        } ]
+                      }
+                    }
+  /side/v1/weathers:
+    get:
+      tags:
+      - side
+      operationId: side-tab/find-weather
+      parameters:
+      - name: metric
+        in: query
+        description: 도씨 유무
+        required: false
+        schema:
+          type: string
+      - name: lang
+        in: query
+        description: 한국어 유무
+        required: false
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/side-v1-weathers1552137753'
+              examples:
+                side-tab/find-weather:
+                  value: |-
+                    {
+                      "message" : "날씨 위젯 조회하였습니다.",
+                      "body" : {
+                        "city" : "서울",
+                        "weather_id" : 1,
+                        "temp" : 16,
+                        "min_temp" : 27,
+                        "max_temp" : 21,
+                        "update_time" : "14:20 갱신",
+                        "main" : "Clear",
+                        "desc" : "맑음",
+                        "is_sunrise" : true
+                      }
+                    }
+  /side/v1/d-day/{d_day_id}:
+    get:
+      tags:
+      - side
+      operationId: side-tab/find-d-day
+      parameters:
+      - name: d_day_id
+        in: path
+        description: 디데이 식별자
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/side-v1-d-day-d_day_id387027713'
+              examples:
+                side-tab/find-d-day:
+                  value: |-
+                    {
+                      "message" : "디데이를 조회했습니다",
+                      "body" : {
+                        "title" : "디데이의 제목",
+                        "d_day" : "D-DAY",
+                        "date" : "2024년 6월 3일",
+                        "local_date" : "2024-06-03"
+                      }
+                    }
+    patch:
+      tags:
+      - side
+      operationId: side-tab/update-d-day
+      parameters:
+      - name: d_day_id
+        in: path
+        description: 디데이 식별자
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/side-v1-d-day-d_day_id-529626301'
+            examples:
+              side-tab/update-d-day:
+                value: |-
+                  {
+                    "title" : "디데이의 제목",
+                    "date" : "2024-06-03"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/side-v1-d-day-d_day_id387027713'
+              examples:
+                side-tab/update-d-day:
+                  value: |-
+                    {
+                      "message" : "디데이를 수정했습니다",
+                      "body" : {
+                        "title" : "디데이의 제목",
+                        "d_day" : "D-DAY",
+                        "date" : "2024년 6월 3일",
+                        "local_date" : "2024-06-03"
+                      }
+                    }
+  /side/v1/goals/{goal_id}:
+    get:
+      tags:
+      - side
+      operationId: side-tab/find-goal
+      parameters:
+      - name: goal_id
+        in: path
+        description: 목표 식별자
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/side-v1-goals-goal_id-2136424074'
+              examples:
+                side-tab/find-goal:
+                  value: |-
+                    {
+                      "message" : "목표를 조회했습니다",
+                      "body" : {
+                        "goal_id" : 0,
+                        "content" : "사이드탭의 목표"
+                      }
+                    }
+    patch:
+      tags:
+      - side
+      operationId: side-tab/update-goal
+      parameters:
+      - name: goal_id
+        in: path
+        description: 목표 식별자
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/side-v1-goals-goal_id-1082010043'
+            examples:
+              side-tab/update-goal:
+                value: |-
+                  {
+                    "content" : "새로운 목표"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/side-v1-goals-goal_id-2136424074'
+              examples:
+                side-tab/update-goal:
+                  value: |-
+                    {
+                      "message" : "목표를 수정했습니다",
+                      "body" : {
+                        "goal_id" : 0,
+                        "content" : "새로운 목표"
+                      }
+                    }
+  /side/v1/memo/{memo_id}:
+    get:
+      tags:
+      - side
+      operationId: side-tab/find-memo
+      parameters:
+      - name: memo_id
+        in: path
+        description: 메모 식별자
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/side-v1-memo-memo_id1285412632'
+              examples:
+                side-tab/find-memo:
+                  value: |-
+                    {
+                      "message" : "메모를 조회했습니다",
+                      "body" : {
+                        "memo" : "메모의 내용"
+                      }
+                    }
+    patch:
+      tags:
+      - side
+      operationId: side-tab/update-memo
+      parameters:
+      - name: memo_id
+        in: path
+        description: 메모 식별자
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/side-v1-memo-memo_id-863565707'
+            examples:
+              side-tab/update-memo:
+                value: |-
+                  {
+                    "memo" : "메모의 내용"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/side-v1-memo-memo_id1535024219'
+              examples:
+                side-tab/update-memo:
+                  value: |-
+                    {
+                      "message" : "메모를 조회했습니다",
+                      "body" : {
+                        "memo" : "메모의 내용"
+                      }
+                    }
+  /todo/v1/todos:
+    get:
+      tags:
+      - todo
+      operationId: todo/getTodos
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo-v1-todos852877396'
+              examples:
+                todo/getTodos:
+                  value: |-
+                    {
+                      "message" : "Todo 목록 조회 성공",
+                      "body" : {
+                        "todo_count" : 2,
+                        "member_id" : 1,
+                        "nick_name" : "모코코",
+                        "todos" : [ {
+                          "todo_id" : 1,
+                          "content" : "운동",
+                          "is_completed" : true
+                        }, {
+                          "todo_id" : 2,
+                          "content" : "공부",
+                          "is_completed" : false
+                        } ]
+                      }
+                    }
+    post:
+      tags:
+      - todo
+      operationId: todo/createTodo
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/todo-v1-todos-todoId-2014849968'
+            examples:
+              todo/createTodo:
+                value: |-
+                  {
+                    "content" : "운동가기"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/notification-v1-notifications-action-notificationId-590174129'
+              examples:
+                todo/createTodo:
+                  value: |-
+                    {
+                      "message" : "Todo 생성 성공"
+                    }
+  /todo/v1/todos/{todoId}:
+    delete:
+      tags:
+      - todo
+      operationId: todo/deleteTodo
+      parameters:
+      - name: todoId
+        in: path
+        description: Todo Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo-v1-todos-todoId486549215'
+              examples:
+                todo/deleteTodo:
+                  value: |-
+                    {
+                      "message" : "Todo 삭제 성공"
+                    }
+    patch:
+      tags:
+      - todo
+      operationId: todo/updateTodo
+      parameters:
+      - name: todoId
+        in: path
+        description: Todo Id
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json;charset=UTF-8:
+            schema:
+              $ref: '#/components/schemas/todo-v1-todos-todoId-2014849968'
+            examples:
+              todo/updateTodo:
+                value: |-
+                  {
+                    "content" : "수정합니다"
+                  }
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo-v1-todos-todoId486549215'
+              examples:
+                todo/updateTodo:
+                  value: |-
+                    {
+                      "message" : "Todo 수정 성공"
+                    }
+  /todo/v1/todos/check/{todoId}:
+    patch:
+      tags:
+      - todo
+      operationId: todo/checkTodo
+      parameters:
+      - name: todoId
+        in: path
+        description: Todo Id
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: "200"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/todo-v1-todos-todoId486549215'
+              examples:
+                todo/checkTodo:
+                  value: |-
+                    {
+                      "message" : "Todo 체크 성공"
+                    }
+components:
+  schemas:
+    label-v1-labels526348895:
+      required:
+      - color
+      - title
+      type: object
+      properties:
+        color:
+          type: string
+          description: 라벨 색상
+        title:
+          type: string
+          description: 라벨 제목
+    review-v1-reviews-type-1001641780:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - review_count
+          type: object
+          properties:
+            reviews:
+              type: array
+              items:
+                required:
+                - created_at
+                - review_id
+                - title
+                type: object
+                properties:
+                  review_id:
+                    type: number
+                    description: 리뷰 인덱스
+                  created_at:
+                    type: string
+                    description: 리뷰 생성일
+                  title:
+                    type: string
+                    description: 리뷰 제목
+                  thumbnail_content:
+                    required:
+                    - '*'
+                    type: object
+                    properties:
+                      '*':
+                        type: string
+                        description: 리뷰의 썸네일 컨텐츠
+            review_count:
+              type: number
+              description: 리뷰 개수
+        message:
+          type: string
+          description: 응답 메세지
+    todo-v1-todos852877396:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - member_id
+          - nick_name
+          - todo_count
+          type: object
+          properties:
+            member_id:
+              type: number
+              description: 작성자 ID
+            todo_count:
+              type: number
+              description: Todo 개수
+            nick_name:
+              type: string
+              description: 작성자 닉네임
+            todos:
+              type: array
+              items:
+                required:
+                - content
+                - is_completed
+                - todo_id
+                type: object
+                properties:
+                  todo_id:
+                    type: number
+                    description: Todo ID
+                  is_completed:
+                    type: boolean
+                    description: Todo 완료여부
+                  content:
+                    type: string
+                    description: Todo 내용
+        message:
+          type: string
+          description: 응답 메시지
+    review-v1-reviews-1465059799:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - review_id
+          type: object
+          properties:
+            review_id:
+              type: number
+              description: 생성한 리뷰의 엔덱스
+        message:
+          type: string
+          description: 응답 메세지
+    side-v1-memo-memo_id1285412632:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - memo
+          type: object
+          properties:
+            memo:
+              type: string
+              description: 조회한 메모
+        message:
+          type: string
+          description: 응답 메시지
+    member-v1-members-nickname-139893332:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - nickname
+          type: object
+          properties:
+            nickname:
+              type: string
+              description: 변경한 닉네임
+        message:
+          type: string
+          description: 응답 메시지
+    schedule-v1-schedules-scheduleId1157950338:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - category
+          - end_date
+          - member_count
+          - schedule_id
+          - start_date
+          - title
+          type: object
+          properties:
+            end_date:
+              type: string
+              description: 생성된 일정의 끝 날짜와 시간
+            group_id:
+              type: number
+              description: 생성된 그룹 일정의 그룹 id
+              nullable: true
+            members:
+              type: array
+              items:
+                required:
+                - member_id
+                - nickname
+                type: object
+                properties:
+                  member_id:
+                    type: number
+                    description: 생성된 일정에 속한 멤버의 인덱스
+                  profile_image:
+                    type: string
+                    description: 조회한 일정에 속한 멤버의 프로필 이미지
+                    nullable: true
+                  nickname:
+                    type: string
+                    description: 생성된 일정에 속한 멤버의 닉네임
+            description:
+              type: string
+              description: 생성된 일정의 설명
+              nullable: true
+            label:
+              type: object
+              properties:
+                member_id:
+                  type: number
+                  description: 생성된 일정의 라벨의 주인 id
+                  nullable: true
+                color:
+                  type: string
+                  description: 생성된 일정의 라벨의 색상
+                  nullable: true
+                title:
+                  type: string
+                  description: 생성된 일정의 라벨의 재목
+                  nullable: true
+                label_id:
+                  type: number
+                  description: 생성된 일정의 라벨의 라벨 id
+                  nullable: true
+              description: 생성된 일정의 라벨
+            repetition:
+              type: object
+              properties:
+                week:
+                  type: number
+                  description: 생성된 일정의 주 반복시 몇주만의 반복인지
+                  nullable: true
+                repetition_cycle:
+                  type: string
+                  description: 생성된 일정의 반복 종류
+                  nullable: true
+                repetition_end_date:
+                  type: string
+                  description: 생성된 일정의 반복 끝 날짜
+                  nullable: true
+                repetition_id:
+                  type: number
+                  description: 생성된 일정의 반복 id
+                  nullable: true
+                repetition_start_date:
+                  type: string
+                  description: 생성된 일정의 반복 시작 날짜
+                  nullable: true
+                day_of_week:
+                  type: number
+                  description: 생성된 일정의 주 반복시 반복 요일
+                  nullable: true
+              description: 생성된 일정의 반복 정보
+            member_count:
+              type: number
+              description: 생성된 일정에 속한 멤버의 수
+            category:
+              type: string
+              description: 생성된 일정의 종류(그룹인지 개인인지)
+            title:
+              type: string
+              description: 생성된 일정의 제목
+            schedule_id:
+              type: number
+              description: 생성된 일정의 인덱스
+            start_date:
+              type: string
+              description: 생성된 일정의 시작 날짜와 시간
+        message:
+          type: string
+          description: 응답 메세지
+    member-v1-members-profile-image533018051:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - profile_image_url
+          type: object
+          properties:
+            profile_image_url:
+              type: string
+              description: 변경한 사용자의 프로필 이미지 URL
+        message:
+          type: string
+          description: 응답 메시지
+    schedule-v1-schedules-scheduleId1840727101:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - category
+          - end_date
+          - member_count
+          - schedule_id
+          - start_date
+          - title
+          type: object
+          properties:
+            end_date:
+              type: string
+              description: 조회된 일정의 끝 날짜와 시간
+            group_id:
+              type: number
+              description: 조회된 그룹 일정의 그룹 id
+              nullable: true
+            members:
+              type: array
+              items:
+                required:
+                - member_id
+                - nickname
+                type: object
+                properties:
+                  member_id:
+                    type: number
+                    description: 조회한 일정에 속한 멤버의 인덱스
+                  profile_image:
+                    type: string
+                    description: 조회한 일정에 속한 멤버의 프로필 이미지
+                    nullable: true
+                  nickname:
+                    type: string
+                    description: 조회한 일정에 속한 멤버의 닉네임
+            description:
+              type: string
+              description: 조회된 일정의 설명
+              nullable: true
+            label:
+              type: object
+              properties:
+                member_id:
+                  type: number
+                  description: 조회된 일정의 라벨의 주인 id
+                  nullable: true
+                color:
+                  type: string
+                  description: 조회된 일정의 라벨의 색상
+                  nullable: true
+                title:
+                  type: string
+                  description: 조회된 일정의 라벨의 재목
+                  nullable: true
+                label_id:
+                  type: number
+                  description: 조회된 일정의 라벨의 라벨 id
+                  nullable: true
+              description: 조회된 일정의 라벨
+            member_count:
+              type: number
+              description: 조회한 일정에 속한 멤버의 수
+            category:
+              type: string
+              description: 조회된 일정의 종류(그룹인지 개인인지)
+            title:
+              type: string
+              description: 조회된 일정의 제목
+            schedule_id:
+              type: number
+              description: 조회한 일정의 인덱스
+            start_date:
+              type: string
+              description: 조회된 일정의 시작 날짜와 시간
+        message:
+          type: string
+          description: 응답 메세지
+    member-v1-members-birthday1331023449:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - birthday
+          - birthday_as_string
+          type: object
+          properties:
+            birthday:
+              type: string
+              description: 변경한 사용자의 생일 형식
+            birthday_as_string:
+              type: string
+              description: 변경한 사용자의 생일
+        message:
+          type: string
+          description: 응답 메시지
+    schedule-v1-schedules-2143806923:
+      required:
+      - category
+      - end_date
+      - start_date
+      - title
+      type: object
+      properties:
+        end_date:
+          type: string
+          description: 일정 끝 날짜와 시간
+        group_id:
+          type: number
+          description: 그룹 일정의 그룹 id
+          nullable: true
+        members:
+          type: array
+          items:
+            required:
+            - member_id
+            type: object
+            properties:
+              member_id:
+                type: number
+                description: 일정에 속한 멤버의 인덱스
+        description:
+          type: string
+          description: 일정 설명
+          nullable: true
+        repetition:
+          type: object
+          properties:
+            week:
+              type: number
+              description: 일정의 주 반복시 몇주만의 반복인지
+              nullable: true
+            repetition_cycle:
+              type: string
+              description: 일정의 반복 종류
+              nullable: true
+            repetition_end_date:
+              type: string
+              description: 일정의 반복 끝 날짜
+              nullable: true
+            repetition_start_date:
+              type: string
+              description: 일정의 반복 시작 날짜
+              nullable: true
+            day_of_week:
+              type: number
+              description: 일정의 주 반복시 반복 요일
+              nullable: true
+          description: 일정의 반복 정보
+        body:
+          type: object
+          properties:
+            members:
+              type: array
+              items:
+                type: object
+                properties:
+                  profile_image:
+                    type: string
+                    description: 조회한 일정에 속한 멤버의 프로필 이미지
+                    nullable: true
+        category:
+          type: string
+          description: 일정의 종류(그룹인지 개인인지)
+        title:
+          type: string
+          description: 일정 제목
+        label_id:
+          type: number
+          description: 일정의 라벨의 라벨 id
+          nullable: true
+        start_date:
+          type: string
+          description: 일정 시작 날짜와 시간
+    review-v1-reviews-reviewId-2055704970:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - review_id
+          type: object
+          properties:
+            review_id:
+              type: number
+              description: 수정한 리뷰의 엔덱스
+        message:
+          type: string
+          description: 응답 메세지
+    side-v1-d-day-d_day_id387027713:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - d_day
+          - date
+          - local_date
+          - title
+          type: object
+          properties:
+            date:
+              type: string
+              description: 수정한 디데이 날짜
+            d_day:
+              type: string
+              description: 수정한 디데이
+            title:
+              type: string
+              description: 수정한 디데이 제목
+            local_date:
+              type: string
+              description: 수정한 디데이 포멧
+        message:
+          type: string
+          description: 응답 메시지
+    member-v1-members-colors710220484:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color_count
+          - colors
+          - select_color
+          type: object
+          properties:
+            color_count:
+              type: number
+              description: 서버의 컬러 색상의 갯수
+            colors:
+              type: array
+              description: 서버의 컬러 색상 목록
+              items:
+                oneOf:
+                - type: object
+                - type: boolean
+                - type: string
+                - type: number
+            select_color:
+              type: string
+              description: 사용자 메인 컬러
+        message:
+          type: string
+          description: 응답 메시지
+    label-v1-labels942183226:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color
+          - label_id
+          - member_id
+          - title
+          type: object
+          properties:
+            member_id:
+              type: number
+              description: 라벨을 생성한 멤버의 인덱스
+            color:
+              type: string
+              description: 생성된 라벨의 색상
+            title:
+              type: string
+              description: 생성된 라벨의 제목
+            label_id:
+              type: number
+              description: 생성된 라벨의 인덱스
+        message:
+          type: string
+          description: 응답 메세지
+    group-v1-groups-groupId-2021476588:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color
+          - id
+          - name
+          type: object
+          properties:
+            color:
+              type: string
+              description: 그룹 대표 색상
+            name:
+              type: string
+              description: 그룹 이름
+            id:
+              type: number
+              description: 그룹 식별자
+        message:
+          type: string
+          description: 응답 메시지
+    label-v1-labels-664349313:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - label_count
+          type: object
+          properties:
+            label_count:
+              type: number
+              description: 조회한 라벨의 개수
+            labels:
+              type: array
+              items:
+                required:
+                - color
+                - label_id
+                - member_id
+                - title
+                type: object
+                properties:
+                  member_id:
+                    type: number
+                    description: 라벨 주인의 인덱스
+                  color:
+                    type: string
+                    description: 라벨의 색상
+                  title:
+                    type: string
+                    description: 라벨의 제목
+                  label_id:
+                    type: number
+                    description: 라벨의 인덱스
+        message:
+          type: string
+          description: 응답 메세지
+    side-v1-weathers1552137753:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - city
+          - desc
+          - is_sunrise
+          - main
+          - max_temp
+          - min_temp
+          - temp
+          - update_time
+          - weather_id
+          type: object
+          properties:
+            update_time:
+              type: string
+              description: 날씨를 조회한 시간
+            temp:
+              type: number
+              description: 온도
+            weather_id:
+              type: number
+              description: 날씨 식별자
+            is_sunrise:
+              type: boolean
+              description: 해가 떠있는지의 유무
+            min_temp:
+              type: number
+              description: 최소 온도
+            city:
+              type: string
+              description: 날씨를 측정한 도시
+            main:
+              type: string
+              description: 날씨
+            max_temp:
+              type: number
+              description: 최대 온도
+            desc:
+              type: string
+              description: 날씨 설명
+        message:
+          type: string
+          description: 응답 메시지
+    notification-v1-notifications-action-notificationId-590174129:
+      required:
+      - message
+      type: object
+      properties:
+        message:
+          type: string
+          description: 응답 메시지
+    member-v1-members-member_id-335746078:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - email
+          - id
+          - main_color
+          - nickname
+          type: object
+          properties:
+            main_color:
+              type: string
+              description: 사용자 기본 색상
+            nickname:
+              type: string
+              description: 사용자 닉네임
+            profile_image_url:
+              type: string
+              description: 사용자 프로필 이미지 URL
+              nullable: true
+            id:
+              type: number
+              description: 사용자 식별자
+            email:
+              type: string
+              description: 사용자 이메일
+        message:
+          type: string
+          description: 응답 메시지
+    member-v1-members-nickname-2080570654:
+      required:
+      - nickname
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: 변경 요청한 닉네임
+    group-v1-groups-groupId-members-invitation-2048567868:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - group_id
+          type: object
+          properties:
+            group_id:
+              type: number
+              description: 그룹 식별자
+        message:
+          type: string
+          description: 응답 메시지
+    schedule-v1-schedules-details-scheduleId-1553930942:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - category
+          - end_date
+          - member_count
+          - schedule_id
+          - start_date
+          - title
+          type: object
+          properties:
+            end_date:
+              type: string
+              description: 조회된 일정의 끝 날짜와 시간
+            group_id:
+              type: number
+              description: 조회된 그룹 일정의 그룹 id
+              nullable: true
+            members:
+              type: array
+              items:
+                required:
+                - member_id
+                - nickname
+                type: object
+                properties:
+                  member_id:
+                    type: number
+                    description: 조회한 일정에 속한 멤버의 인덱스
+                  profile_image:
+                    type: string
+                    description: 조회한 일정에 속한 멤버의 프로필 이미지
+                    nullable: true
+                  nickname:
+                    type: string
+                    description: 조회한 일정에 속한 멤버의 닉네임
+            description:
+              type: string
+              description: 조회된 일정의 설명
+              nullable: true
+            label:
+              type: object
+              properties:
+                member_id:
+                  type: number
+                  description: 조회된 일정의 라벨의 주인 id
+                  nullable: true
+                color:
+                  type: string
+                  description: 조회된 일정의 라벨의 색상
+                  nullable: true
+                title:
+                  type: string
+                  description: 조회된 일정의 라벨의 재목
+                  nullable: true
+                label_id:
+                  type: number
+                  description: 조회된 일정의 라벨의 라벨 id
+                  nullable: true
+              description: 조회된 일정의 라벨
+            repetition:
+              type: object
+              properties:
+                week:
+                  type: number
+                  description: 조회된 일정의 주 반복시 몇주만의 반복인지
+                  nullable: true
+                repetition_cycle:
+                  type: string
+                  description: 조회된 일정의 반복 종류
+                  nullable: true
+                repetition_end_date:
+                  type: string
+                  description: 조회된 일정의 반복 끝 날짜
+                  nullable: true
+                repetition_id:
+                  type: number
+                  description: 조회된 일정의 반복 id
+                  nullable: true
+                repetition_start_date:
+                  type: string
+                  description: 조회된 일정의 반복 시작 날짜
+                  nullable: true
+                day_of_week:
+                  type: number
+                  description: 조회된 일정의 주 반복시 반복 요일
+                  nullable: true
+              description: 조회된 일정의 반복 정보
+            member_count:
+              type: number
+              description: 조회한 일정에 속한 멤버의 수
+            category:
+              type: string
+              description: 조회된 일정의 종류(그룹인지 개인인지)
+            title:
+              type: string
+              description: 조회된 일정의 제목
+            schedule_id:
+              type: number
+              description: 조회한 일정의 인덱스
+            start_date:
+              type: string
+              description: 조회된 일정의 시작 날짜와 시간
+        message:
+          type: string
+          description: 응답 메세지
+    side-v1-memo-memo_id1535024219:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - memo
+          type: object
+          properties:
+            memo:
+              type: string
+              description: 수정한 메모
+        message:
+          type: string
+          description: 응답 메시지
+    review-v1-reviews-detail-reviewId603208797:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - contents
+          - review_id
+          - title
+          type: object
+          properties:
+            schedule:
+              required:
+              - category
+              - description
+              - end_date
+              - member_count
+              - schedule_id
+              - start_date
+              - title
+              type: object
+              properties:
+                end_date:
+                  type: string
+                  description: 일정 끝 일
+                group_id:
+                  type: number
+                  description: 그룹 일정의 그룹 id
+                  nullable: true
+                members:
+                  type: array
+                  items:
+                    required:
+                    - member_id
+                    - nickname
+                    type: object
+                    properties:
+                      member_id:
+                        type: number
+                        description: 참여 멤버의 인덱스
+                      profile_image:
+                        type: string
+                        description: 참여 멤버의 프로필 이미지
+                        nullable: true
+                      nickname:
+                        type: string
+                        description: 참여 멤버의 닉네임
+                description:
+                  type: string
+                  description: 일정 묘사
+                label:
+                  type: object
+                  properties:
+                    member_id:
+                      type: number
+                      description: 라벨 주인의 인덱스
+                      nullable: true
+                    color:
+                      type: string
+                      description: 라벨 색상
+                      nullable: true
+                    title:
+                      type: string
+                      description: 라벨 제목
+                      nullable: true
+                    label_id:
+                      type: number
+                      description: 라벨 인덱스
+                      nullable: true
+                  description: 일정 라벨
+                member_count:
+                  type: number
+                  description: 스케줄의 참여 멤버 수
+                category:
+                  type: string
+                  description: 일정 종류
+                title:
+                  type: string
+                  description: 일정 제목
+                schedule_id:
+                  type: number
+                  description: 일정 id
+                start_date:
+                  type: string
+                  description: 일정 시작 일
+            review_id:
+              type: number
+              description: 리뷰의 엔덱스
+            contents:
+              type: array
+              description: 리뷰에 컨텐츠 리스트
+              items:
+                required:
+                - '*'
+                type: object
+                properties:
+                  '*':
+                    type: string
+                    description: 컨텐츠 내용
+            title:
+              type: string
+              description: 리뷰 제목
+        message:
+          type: string
+          description: 응답 메세지
+    group-v1-groups-groupId-members-force-out-674408473:
+      required:
+      - member_id
+      type: object
+      properties:
+        member_id:
+          type: number
+          description: 강제 퇴장할 그룹 멤버 식별자
+    schedule-v1-schedules-scheduleId-modificationType1075432245:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - schedule_count
+          type: object
+          properties:
+            schedule_count:
+              type: number
+              description: 삭제한 일정의 개수
+            schedules:
+              type: array
+              items:
+                required:
+                - schedule_id
+                type: object
+                properties:
+                  schedule_id:
+                    type: number
+                    description: 삭제한 일정의 인덱스
+        message:
+          type: string
+          description: 응답 메세지
+    member-v1-members-timezones-926334236:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - timezone
+          type: object
+          properties:
+            timezone:
+              type: string
+              description: 변경한 사용자의 타임존
+        message:
+          type: string
+          description: 응답 메시지
+    side-v1-d-day-d_day_id-529626301:
+      required:
+      - date
+      - title
+      type: object
+      properties:
+        date:
+          type: string
+          description: 수정 요청한 디데이 날짜
+        title:
+          type: string
+          description: 수정 요청한 디데이 제목
+    file-v1-images-843780732:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - image_url
+          type: object
+          properties:
+            image_url:
+              type: string
+              description: 업로드한 이미지 URL
+        message:
+          type: string
+          description: 응답 메시지
+    auth-v1-reissue-723021484:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - access_token
+          - member_id
+          - refresh_token
+          type: object
+          properties:
+            access_token:
+              type: string
+              description: JWT Access Token
+            member_id:
+              type: number
+              description: 회원 식별자
+            refresh_token:
+              type: string
+              description: JWT Refresh Token
+        message:
+          type: string
+          description: 응답 메시지
+    todo-v1-todos-todoId-2014849968:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          type: string
+          description: Todo 내용
+    member-v1-members-birthday-891976851:
+      required:
+      - birthday
+      type: object
+      properties:
+        birthday:
+          type: string
+          description: 변경 요청한 사용자의 생일
+    group-v1-groups-groupId-1709623646:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color
+          - member_count
+          - members
+          type: object
+          properties:
+            color:
+              type: string
+              description: 회원의 그룹 컬러
+            members:
+              type: array
+              description: 조회한 그룹 회원 목록
+              items:
+                required:
+                - email
+                - id
+                - is_accepted
+                - nickname
+                type: object
+                properties:
+                  is_accepted:
+                    type: boolean
+                    description: 가입 유무
+                  profile_image:
+                    type: string
+                    description: 회원 프로필 이미지
+                    nullable: true
+                  nickname:
+                    type: string
+                    description: 회원 닉네임
+                  id:
+                    type: number
+                    description: 회원 식별자
+                  email:
+                    type: string
+                    description: 회원 이메일
+            member_count:
+              type: number
+              description: 조회한 그룹 회원수
+        message:
+          type: string
+          description: 응답 메시지
+    side-v1-goals-goal_id-1082010043:
+      required:
+      - content
+      type: object
+      properties:
+        content:
+          type: string
+          description: 수정 요청한 목표 내용
+    notification-v1-notifications-872507205:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - has_next
+          - last_id
+          - page_size
+          - total_notification_count
+          - total_page_count
+          type: object
+          properties:
+            total_notification_count:
+              type: number
+              description: 총 알림개수
+            last_id:
+              type: string
+              description: 마지막조회알림ID
+            total_page_count:
+              type: number
+              description: 총 페이지 수
+            has_next:
+              type: boolean
+              description: 다음 페이지 여부
+            notifications:
+              type: array
+              items:
+                required:
+                - id
+                - is_acted
+                - is_read
+                - member_id
+                - message
+                - target_id
+                - type_code
+                type: object
+                properties:
+                  is_read:
+                    type: boolean
+                    description: 알림읽음 여부
+                  member_id:
+                    type: number
+                    description: 회원ID
+                  is_acted:
+                    type: boolean
+                    description: 회원 action 처리여부
+                  target_id:
+                    type: number
+                    description: 알림 대상 ID
+                  id:
+                    type: string
+                    description: 알림ID
+                  message:
+                    type: string
+                    description: 메시지
+                  type_code:
+                    type: string
+                    description: 알림 타입 코드
+            page_size:
+              type: number
+              description: 페이지 조회 사이즈
+        message:
+          type: string
+          description: 응답 메시지
+    group-v1-groups-groupId2024631656:
+      required:
+      - color
+      - name
+      type: object
+      properties:
+        color:
+          type: string
+          description: 수정할 그룹 색상
+        name:
+          type: string
+          description: 수정할 그룹 이름
+    calendar-v1-calendars-type1395031786:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - schedule_count
+          type: object
+          properties:
+            schedule_count:
+              type: number
+              description: 일정 개수
+            schedules:
+              type: array
+              items:
+                required:
+                - category
+                - description
+                - end_date
+                - schedule_id
+                - start_date
+                - title
+                type: object
+                properties:
+                  end_date:
+                    type: string
+                    description: "일정 끝 날짜, 시간"
+                  description:
+                    type: string
+                    description: 일정 설명
+                  label:
+                    type: object
+                    properties:
+                      member_id:
+                        type: number
+                        description: 일정의 라벨의 멤버 인덱스
+                        nullable: true
+                      color:
+                        type: string
+                        description: 일정의 라벨의 색상
+                        nullable: true
+                      title:
+                        type: string
+                        description: 일정의 라벨의 제목
+                        nullable: true
+                      label_id:
+                        type: number
+                        description: 일정의 라벨의 인덱스
+                        nullable: true
+                    description: 일정의 라벨
+                  category:
+                    type: string
+                    description: 일정 종류
+                  title:
+                    type: string
+                    description: 일정 제목
+                  schedule_id:
+                    type: number
+                    description: 일정 인덱스
+                  group:
+                    type: object
+                    properties:
+                      color:
+                        type: string
+                        description: 그룹의 색상
+                        nullable: true
+                      group_id:
+                        type: number
+                        description: 그룹의 인덱스
+                        nullable: true
+                      description:
+                        type: string
+                        description: 그룹의 설명
+                        nullable: true
+                      title:
+                        type: string
+                        description: 그룹의 제목
+                        nullable: true
+                    description: 그룹
+                  start_date:
+                    type: string
+                    description: "일정 시작 날짜, 시간"
+        message:
+          type: string
+          description: 응답 메세지
+    group-v1-groups-groupId-members-colors-1393652192:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color
+          type: object
+          properties:
+            color:
+              type: string
+              description: 변경된 그룹 색상
+        message:
+          type: string
+          description: 응답 메시지
+    label-v1-labels-labelId-1387906680:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color
+          - label_id
+          - member_id
+          - title
+          type: object
+          properties:
+            member_id:
+              type: number
+              description: 라벨을 수정한 멤버의 인덱스
+            color:
+              type: string
+              description: 수정된 라벨의 색상
+            title:
+              type: string
+              description: 수정된 라벨의 제목
+            label_id:
+              type: number
+              description: 수정된 라벨의 인덱스
+        message:
+          type: string
+          description: 응답 메세지
+    schedule-v1-schedules-scheduleId-971847230:
+      required:
+      - category
+      - end_date
+      - start_date
+      - title
+      type: object
+      properties:
+        end_date:
+          type: string
+          description: 일정 끝 날짜와 시간
+        group_id:
+          type: number
+          description: 그룹 일정의 그룹 id
+          nullable: true
+        members:
+          type: array
+          items:
+            required:
+            - member_id
+            type: object
+            properties:
+              member_id:
+                type: number
+                description: 일정에 속한 멤버의 인덱스
+        description:
+          type: string
+          description: 일정 설명
+          nullable: true
+        repetition:
+          type: object
+          properties:
+            week:
+              type: number
+              description: 일정의 주 반복시 몇주만의 반복인지
+              nullable: true
+            repetition_cycle:
+              type: string
+              description: 일정의 반복 종류
+              nullable: true
+            repetition_end_date:
+              type: string
+              description: 일정의 반복 끝 날짜
+              nullable: true
+            repetition_start_date:
+              type: string
+              description: 일정의 반복 시작 날짜
+              nullable: true
+            day_of_week:
+              type: number
+              description: 일정의 주 반복시 반복 요일
+              nullable: true
+          description: 일정의 반복 정보
+        category:
+          type: string
+          description: 일정의 종류(그룹인지 개인인지)
+        title:
+          type: string
+          description: 일정 제목
+        label_id:
+          type: number
+          description: 일정의 라벨의 라벨 id
+          nullable: true
+        start_date:
+          type: string
+          description: 일정 시작 날짜와 시간
+    group-v1-groups-groupId-members-force-out-100813394:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - member_id
+          type: object
+          properties:
+            member_id:
+              type: number
+              description: 강제 퇴장된 그룹 멤버 식별자
+        message:
+          type: string
+          description: 응답 메시지
+    group-v1-groups-groupId-members-invitation1210620785:
+      required:
+      - member_id_list
+      type: object
+      properties:
+        member_id_list:
+          type: array
+          description: 초대할 그룹 멤버 식별자 리스트
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+    calendar-v1-calendars-type-groupId1204135838:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - schedule_count
+          type: object
+          properties:
+            schedule_count:
+              type: number
+              description: 일정 개수
+            schedules:
+              type: array
+              items:
+                required:
+                - category
+                - end_date
+                - member_count
+                - schedule_id
+                - start_date
+                - title
+                type: object
+                properties:
+                  end_date:
+                    type: string
+                    description: "일정 끝 날짜, 시간"
+                  members:
+                    type: array
+                    items:
+                      required:
+                      - color
+                      - member_id
+                      - nickname
+                      type: object
+                      properties:
+                        member_id:
+                          type: number
+                          description: 일정의 속한 멤버 인덱스
+                        color:
+                          type: string
+                          description: 일정의 속한 멤버의 기본 색상
+                        nickname:
+                          type: string
+                          description: 일정의 속한 멤버의 닉네임
+                  member_count:
+                    type: number
+                    description: 일정의 속한 멤버 수
+                  category:
+                    type: string
+                    description: 일정 종류
+                  title:
+                    type: string
+                    description: 일정 제목
+                  schedule_id:
+                    type: number
+                    description: 일정 인덱스
+                  start_date:
+                    type: string
+                    description: "일정 시작 날짜, 시간"
+            group:
+              required:
+              - color
+              - group_id
+              - title
+              type: object
+              properties:
+                color:
+                  type: string
+                  description: 그룹의 그룹 색상
+                group_id:
+                  type: number
+                  description: 그룹의 그룹 id
+                title:
+                  type: string
+                  description: 그룹의 그룹 이름
+        message:
+          type: string
+          description: 응답 메세지
+    side-v1-goals-goal_id-2136424074:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - content
+          - goal_id
+          type: object
+          properties:
+            goal_id:
+              type: number
+              description: 목표 식별자
+            content:
+              type: string
+              description: 수정한 목표 내용
+        message:
+          type: string
+          description: 응답 메시지
+    todo-v1-todos-todoId486549215:
+      type: object
+    group-v1-groups-groupId-members-colors1825655985:
+      required:
+      - color
+      type: object
+      properties:
+        color:
+          type: string
+          description: 변경할 그룹 색상
+    review-v1-reviews-1576008846:
+      required:
+      - contents
+      - schedule_id
+      - title
+      type: object
+      properties:
+        contents:
+          type: array
+          description: 리뷰에 컨텐츠 리스트
+          items:
+            required:
+            - '*'
+            type: object
+            properties:
+              '*':
+                type: string
+                description: 컨텐츠 내용
+        title:
+          type: string
+          description: 리뷰 제목
+        schedule_id:
+          type: number
+          description: 리뷰와 연결된 일정의 인덱스
+    calendar-v1-calendars-years1330168621:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - block_count
+          type: object
+          properties:
+            blocks:
+              type: array
+              items:
+                required:
+                - date
+                - time
+                type: object
+                properties:
+                  date:
+                    type: string
+                    description: 날짜
+                  time:
+                    type: number
+                    description: 해당 날짜의 총 시간
+            block_count:
+              type: number
+              description: 날 개수
+        message:
+          type: string
+          description: 응답 메세지
+    member-v1-members2084348635:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - member_count
+          - members
+          type: object
+          properties:
+            members:
+              type: array
+              description: 조회된 사용자들의 목록
+              items:
+                required:
+                - email
+                - id
+                - nickname
+                type: object
+                properties:
+                  nickname:
+                    type: string
+                    description: 조회한 사용자의 닉네임
+                  profile_image_url:
+                    type: string
+                    description: 조회한 사용자의 프로필 이미지
+                    nullable: true
+                  id:
+                    type: number
+                    description: 조회한 사용자의 식별자
+                  email:
+                    type: string
+                    description: 조회한 사용자의 이메일
+            member_count:
+              type: number
+              description: 조회된 사용자들의 수
+        message:
+          type: string
+          description: 응답 메시지
+    group-v1-groups-members-1943332542:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - group_count
+          - groups
+          - invited_group_count
+          - invited_groups
+          type: object
+          properties:
+            group_count:
+              type: number
+              description: 가입한 그룹의 개수
+            invited_groups:
+              type: array
+              description: 가입한 그룹
+              items:
+                required:
+                - color
+                - id
+                - is_owner
+                - name
+                type: object
+                properties:
+                  color:
+                    type: string
+                    description: 그룹 라벨 색상
+                  is_owner:
+                    type: boolean
+                    description: 그룹 주인 유무
+                  name:
+                    type: string
+                    description: 그룹 이름
+                  id:
+                    type: number
+                    description: 그룹 식별자
+            groups:
+              type: array
+              description: 가입한 그룹
+              items:
+                required:
+                - color
+                - id
+                - is_owner
+                - name
+                type: object
+                properties:
+                  color:
+                    type: string
+                    description: 그룹 라벨 색상
+                  is_owner:
+                    type: boolean
+                    description: 그룹 주인 유무
+                  name:
+                    type: string
+                    description: 그룹 이름
+                  id:
+                    type: number
+                    description: 그룹 식별자
+            invited_group_count:
+              type: number
+              description: 가입 대기중인 그룹의 개수
+        message:
+          type: string
+          description: 응답 메시지
+    member-v1-members-colors807170801:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color
+          type: object
+          properties:
+            color:
+              type: string
+              description: 변경한 컬러 코드
+        message:
+          type: string
+          description: 응답 메시지
+    member-v1-members-timezones-432436010:
+      required:
+      - timezone
+      type: object
+      properties:
+        timezone:
+          type: string
+          description: 변경 요청한 사용자의 타임존
+    label-v1-labels-labelId154821834:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - color
+          - label_id
+          - member_id
+          - title
+          type: object
+          properties:
+            member_id:
+              type: number
+              description: 라벨을 조회한 멤버의 인덱스
+            color:
+              type: string
+              description: 조회된 라벨의 색상
+            title:
+              type: string
+              description: 조회된 라벨의 제목
+            label_id:
+              type: number
+              description: 조회한 라벨의 인덱스
+        message:
+          type: string
+          description: 응답 메세지
+    side-v1-memo-memo_id-863565707:
+      required:
+      - memo
+      type: object
+      properties:
+        memo:
+          type: string
+          description: 수정 요청한 메모
+    label-v1-labels-main102750181:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - label_count
+          type: object
+          properties:
+            label_count:
+              type: number
+              description: 라벨과 그룹의 총 개수
+            labels:
+              type: array
+              items:
+                required:
+                - category
+                - color
+                - id
+                - title
+                type: object
+                properties:
+                  color:
+                    type: string
+                    description: 라벨이나 그룹의 색상
+                  id:
+                    type: number
+                    description: 라벨이나 그룹의 아이디
+                  title:
+                    type: string
+                    description: 라벨이나 그룹의 제목
+                  category:
+                    type: string
+                    description: 타입
+        message:
+          type: string
+          description: 응답 메세지
+    group-v1-groups-2118240443:
+      required:
+      - color
+      - member_id_list
+      - name
+      type: object
+      properties:
+        color:
+          type: string
+          description: 그룹 메인 컬러
+        name:
+          type: string
+          description: 그룹 이름
+        member_id_list:
+          type: array
+          description: 그룹 멤버 식별자 리스트
+          items:
+            oneOf:
+            - type: object
+            - type: boolean
+            - type: string
+            - type: number
+    member-v1-members-colors667278139:
+      required:
+      - color
+      type: object
+      properties:
+        color:
+          type: string
+          description: 변경 요청한 컬러 코드
+    member-v1-timezones1715234499:
+      required:
+      - message
+      type: object
+      properties:
+        body:
+          required:
+          - member_timezone
+          - timezone_count
+          - timezones
+          type: object
+          properties:
+            timezones:
+              type: array
+              description: 서버의 타임존 목록
+              items:
+                oneOf:
+                - type: object
+                - type: boolean
+                - type: string
+                - type: number
+            member_timezone:
+              type: string
+              description: 사용자의 타임존
+            timezone_count:
+              type: number
+              description: 서버의 타임존 개수
+        message:
+          type: string
+          description: 응답 메시지
+
+          securitySchemes:
+            APIKey:
+              type: apiKey
+              name: Authorization
+              in: header
+          security:
+            - APIKey: [ ]  # Apply the security scheme here
+        
