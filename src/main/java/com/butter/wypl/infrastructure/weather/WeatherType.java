@@ -30,6 +30,7 @@ public enum WeatherType {
 	private final int weatherId;
 	private final Set<Integer> ids;
 	private final String description;
+	// FIXME: 날씨 별로 글을 따로 작성해서 프론트에게 넘겨주기
 
 	public boolean containsIds(final int weatherId) {
 		return ids.contains(weatherId);
