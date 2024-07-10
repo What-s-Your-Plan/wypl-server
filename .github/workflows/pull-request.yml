@@ -2,9 +2,12 @@ name: 🧪 Run Spring Boot Tests on Pull Request
 
 on:
   pull_request:
+    branch:
+      - main
+      - dev
 
 jobs:
-  test:
+  copy-oas-to-swagger:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,4 +34,4 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: 🧪 Spring Boot Test
-        run: ./gradlew clean test
+        run: ./gradlew clean copyOasToSwagger
