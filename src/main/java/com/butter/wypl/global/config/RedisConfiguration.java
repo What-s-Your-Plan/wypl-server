@@ -10,7 +10,7 @@ import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactor
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.repository.configuration.EnableRedisRepositories;
 
-@Profile({"dev", "blue", "green"})
+@Profile({"dev", "prod"})
 @EnableRedisRepositories
 @Configuration
 public class RedisConfiguration {

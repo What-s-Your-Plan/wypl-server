@@ -11,7 +11,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import lombok.RequiredArgsConstructor;
 
-@Profile({"dev", "blue", "green"})
+@Profile({"dev", "prod"})
 @RequiredArgsConstructor
 @Configuration
 public class SecurityConfiguration {

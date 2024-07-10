@@ -16,5 +16,4 @@ spring:
         - default
         - local
         - dev
-        - blue
-        - green
+        - prod
