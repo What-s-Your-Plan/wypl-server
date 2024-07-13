@@ -7,7 +7,7 @@ build/
 !**/src/test/**/build/
 htmlReport
 reports
-#**/resources/static/swagger-ui
+**/resources/static/swagger-ui
 logs
 
 ### STS ###
