@@ -134,27 +134,27 @@ public class SideTabServiceImpl implements
 		OpenWeatherResponse response = weatherClient.fetchWeather(cond);
 
 		String updateTime = getUpdateTime(cond.city());
+		WeatherType weatherType = getWeatherTypeById(response.getWeatherId());
 		WeatherWidget weatherWidget = WeatherWidget.builder()
 				.weatherRegion(cond.city())
-				.weatherId(getWeatherId(response.getWeatherId()))
+				.weatherId(weatherType.getWeatherId())
 				.temp(Math.round(response.getTemperature()))
 				.minTemp(Math.round(response.getMinTemperature()))
 				.maxTemp(Math.round(response.getMaxTemperature()))
 				.updateTime(updateTime)
 				.main(response.getWeatherName())
-				.desc(response.getWeatherDescription())
+				.desc(weatherType.getDescription())
 				.sunset(response.getSunset())
 				.sunrise(response.getSunrise())
 				.build();
 		return weatherWidgetRepository.save(weatherWidget);
 	}
 
-	private int getWeatherId(final int id) {
-		WeatherType findWeatherType = Arrays.stream(WeatherType.values())
+	private WeatherType getWeatherTypeById(final int id) {
+		return Arrays.stream(WeatherType.values())
 				.filter(weatherType -> weatherType.containsIds(id))
 				.findFirst()
 				.orElseThrow(() -> new SideTabException(SideTabErrorCode.INVALID_WEATHER_ID));
-		return findWeatherType.getWeatherId();
 	}
 
 	private String getUpdateTime(final WeatherRegion weatherRegion) {
