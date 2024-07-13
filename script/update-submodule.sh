@@ -1,6 +1,6 @@
 #!/bin/bash
 
-echo -e "🚀 Start Submodule Update\n"
+echo "🚀 Start Submodule Update\n"
 
 cd ..
 git submodule update --remote --merge
