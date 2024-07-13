@@ -2,6 +2,8 @@
 
 echo "1. 🚀 Start Docker Image Push!\n"
 
+cd ..
+
 JAR_FILE=$(find build/libs/ -type f -name "*.jar" | head -n 1)
 IMAGE_NAME=$(basename "$JAR_FILE" | cut -d '-' -f 1)
 IMAGE_TAG=$(basename "$JAR_FILE" | cut -d '-' -f 2 | cut -d '.' -f 1-3)
