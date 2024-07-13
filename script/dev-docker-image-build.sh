@@ -1,4 +1,4 @@
-#bin/sh
+#!/bin/bash
 
 echo -e "🚀 Start Dev Docker Image Build!\n"
 cd ..
