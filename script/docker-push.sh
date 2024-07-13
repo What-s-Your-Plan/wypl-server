@@ -31,3 +31,6 @@ echo "\n2. 🐬 Docker Image Push, Version: $HARBOR_HOSTNAME/wypl/$IMAGE_NAME:$I
 echo $HARBOR_PASSWORD | docker login $HARBOR_HOSTNAME -u $HARBOR_USERNAME --password-stdin
 docker push $HARBOR_HOSTNAME/wypl/$IMAGE_NAME:$IMAGE_TAG
 docker push $HARBOR_HOSTNAME/wypl/$IMAGE_NAME:latest
+
+echo "\n3. ❌ Docker Image Remove, Version: $HARBOR_HOSTNAME/wypl/$IMAGE_NAME:$IMAGE_TAG"
+docker image rm $HARBOR_HOSTNAME/wypl/$IMAGE_NAME:$IMAGE_TAG
