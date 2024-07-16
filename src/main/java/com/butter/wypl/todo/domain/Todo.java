@@ -1,7 +1,5 @@
 package com.butter.wypl.todo.domain;
 
-import org.hibernate.annotations.ColumnDefault;
-
 import com.butter.wypl.global.common.BaseEntity;
 import com.butter.wypl.member.domain.Member;
 
@@ -39,7 +37,6 @@ public class Todo extends BaseEntity {
 	private String content;
 
 	@Column(name = "is_completed", nullable = false)
-	@ColumnDefault(value = "false")
 	private boolean isCompleted;
 
 	public void updateContent(String content) {
