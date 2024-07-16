@@ -1,191 +1,188 @@
-create table label
+create table WYPL.LABEL
 (
-    label_id    integer                                                                                                                                                                                        not null auto_increment,
-    member_id   integer                                                                                                                                                                                        not null,
-    created_at  datetime(6)                                                                                                                                                                                    not null,
-    deleted_at  datetime(6),
-    modified_at datetime(6)                                                                                                                                                                                    not null,
-    title       varchar(15)                                                                                                                                                                                    not null,
-    color       enum ('labelRed','labelPink','labelOrange','labelYellow','labelGreen','labelLeaf','labelBlue','labelSky','labelNavy','labelIndigo','labelPurple','labelLavender','labelCharcoal','labelBrown') not null,
-    primary key (label_id)
-) engine = InnoDB;
+    LABEL_ID    NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT  TIMESTAMP(6)      not null,
+    DELETED_AT  TIMESTAMP(6),
+    MODIFIED_AT TIMESTAMP(6)      not null,
+    COLOR       VARCHAR2(20 char) not null
+        check (color in ('labelRed', 'labelPink', 'labelOrange', 'labelYellow', 'labelGreen', 'labelLeaf', 'labelBlue',
+                         'labelSky', 'labelNavy', 'labelIndigo', 'labelPurple', 'labelLavender', 'labelCharcoal',
+                         'labelBrown')),
+    MEMBER_ID   NUMBER(10)        not null,
+    TITLE       VARCHAR2(15 char) not null
+)
+/
 
-create table member
+create table WYPL.MEMBER
 (
-    birthday      date,
-    member_id     integer                                                                                                                                                                                        not null auto_increment,
-    created_at    datetime(6)                                                                                                                                                                                    not null,
-    deleted_at    datetime(6),
-    modified_at   datetime(6)                                                                                                                                                                                    not null,
-    nickname      varchar(20)                                                                                                                                                                                    not null,
-    email         varchar(50)                                                                                                                                                                                    not null,
-    profile_image varchar(100),
-    color         enum ('labelRed','labelPink','labelOrange','labelYellow','labelGreen','labelLeaf','labelBlue','labelSky','labelNavy','labelIndigo','labelPurple','labelLavender','labelCharcoal','labelBrown') not null,
-    timezone      enum ('KOREA','WEST_USA','EAST_USA','ENGLAND')                                                                                                                                                 not null,
-    primary key (member_id)
-) engine = InnoDB;
+    MEMBER_ID     NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT    TIMESTAMP(6)      not null,
+    DELETED_AT    TIMESTAMP(6),
+    MODIFIED_AT   TIMESTAMP(6)      not null,
+    BIRTHDAY      DATE,
+    COLOR         VARCHAR2(20 char) not null
+        check (color in ('labelRed', 'labelPink', 'labelOrange', 'labelYellow', 'labelGreen', 'labelLeaf', 'labelBlue',
+                         'labelSky', 'labelNavy', 'labelIndigo', 'labelPurple', 'labelLavender', 'labelCharcoal',
+                         'labelBrown')),
+    EMAIL         VARCHAR2(50 char) not null
+        constraint UK_MBMCQELTY0FBRVXP1Q58DN57T
+            unique,
+    NICKNAME      VARCHAR2(20 char) not null,
+    PROFILE_IMAGE VARCHAR2(100 char),
+    TIMEZONE      VARCHAR2(10 char) not null
+        check (timezone in ('KOREA', 'WEST_USA', 'EAST_USA', 'ENGLAND'))
+)
+/
 
-create table member_group
+create table WYPL.GROUPS
 (
-    group_id    integer                                                                                                                                                                                        not null,
-    member_id   integer                                                                                                                                                                                        not null,
-    created_at  datetime(6)                                                                                                                                                                                    not null,
-    deleted_at  datetime(6),
-    modified_at datetime(6)                                                                                                                                                                                    not null,
-    color       enum ('labelRed','labelPink','labelOrange','labelYellow','labelGreen','labelLeaf','labelBlue','labelSky','labelNavy','labelIndigo','labelPurple','labelLavender','labelCharcoal','labelBrown') not null,
-    state       enum ('PENDING','ACCEPTED')                                                                                                                                                                    not null,
-    primary key (group_id, member_id)
-) engine = InnoDB;
+    GROUP_ID    NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT  TIMESTAMP(6)      not null,
+    DELETED_AT  TIMESTAMP(6),
+    MODIFIED_AT TIMESTAMP(6)      not null,
+    COLOR       VARCHAR2(20 char)
+        check (color in ('labelRed', 'labelPink', 'labelOrange', 'labelYellow', 'labelGreen', 'labelLeaf', 'labelBlue',
+                         'labelSky', 'labelNavy', 'labelIndigo', 'labelPurple', 'labelLavender', 'labelCharcoal',
+                         'labelBrown')),
+    NAME        VARCHAR2(20 char) not null,
+    OWNER_ID    NUMBER(10)        not null
+        constraint FKD7Y6AGDAQ9SKOCLCUA8JT0MG7
+            references WYPL.MEMBER
+)
+/
 
-create table member_schedule
+create table WYPL.MEMBER_GROUP
 (
-    member_id          integer     not null,
-    member_schedule_id integer     not null auto_increment,
-    schedule_id        integer     not null,
-    created_at         datetime(6) not null,
-    deleted_at         datetime(6),
-    modified_at        datetime(6) not null,
-    primary key (member_schedule_id)
-) engine = InnoDB;
+    GROUP_ID    NUMBER(10)        not null
+        constraint FKQBL6CYEPSHW3UQJPE24EKE4QU
+            references WYPL.GROUPS,
+    MEMBER_ID   NUMBER(10)        not null
+        constraint FKI9080RFWTRT5JLVIM4MCG4RL4
+            references WYPL.MEMBER,
+    CREATED_AT  TIMESTAMP(6)      not null,
+    DELETED_AT  TIMESTAMP(6),
+    MODIFIED_AT TIMESTAMP(6)      not null,
+    COLOR       VARCHAR2(20 char) not null
+        check (color in ('labelRed', 'labelPink', 'labelOrange', 'labelYellow', 'labelGreen', 'labelLeaf', 'labelBlue',
+                         'labelSky', 'labelNavy', 'labelIndigo', 'labelPurple', 'labelLavender', 'labelCharcoal',
+                         'labelBrown')),
+    STATE       VARCHAR2(20 char) not null
+        check (state in ('PENDING', 'ACCEPTED')),
+    primary key (GROUP_ID, MEMBER_ID)
+)
+/
 
-create table repetition
+create table WYPL.REPETITION
 (
-    day_of_week           BINARY(7),
-    repetition_end_date   date,
-    repetition_id         integer     not null auto_increment,
-    repetition_start_date date,
-    week                  integer     not null,
-    created_at            datetime(6) not null,
-    deleted_at            datetime(6),
-    modified_at           datetime(6) not null,
-    repetition_cycle      enum ('WEEK','MONTH','YEAR'),
-    primary key (repetition_id)
-) engine = InnoDB;
+    REPETITION_ID         NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT            TIMESTAMP(6) not null,
+    DELETED_AT            TIMESTAMP(6),
+    MODIFIED_AT           TIMESTAMP(6) not null,
+    DAY_OF_WEEK           NUMBER(10),
+    REPETITION_CYCLE      VARCHAR2(255 char)
+        check (repetition_cycle in ('WEEK', 'MONTH', 'YEAR')),
+    REPETITION_END_DATE   DATE,
+    REPETITION_START_DATE DATE,
+    WEEK                  NUMBER(10)
+)
+/
 
-create table review
+create table WYPL.SCHEDULE
 (
-    member_schedule_id integer,
-    review_id          integer     not null auto_increment,
-    created_at         datetime(6) not null,
-    deleted_at         datetime(6),
-    modified_at        datetime(6) not null,
-    title              varchar(50) not null,
-    primary key (review_id)
-) engine = InnoDB;
+    SCHEDULE_ID   NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT    TIMESTAMP(6)       not null,
+    DELETED_AT    TIMESTAMP(6),
+    MODIFIED_AT   TIMESTAMP(6)       not null,
+    CATEGORY      VARCHAR2(255 char) not null
+        check (category in ('MEMBER', 'GROUP')),
+    DESCRIPTION   VARCHAR2(255 char),
+    END_DATE      TIMESTAMP(6)       not null,
+    GROUP_ID      NUMBER(10),
+    START_DATE    TIMESTAMP(6)       not null,
+    TITLE         VARCHAR2(50 char)  not null,
+    LABEL_ID      NUMBER(10)
+        constraint FKJCLESVYGB0Q6KB7WP9SG9FG43
+            references WYPL.LABEL,
+    REPETITION_ID NUMBER(10)
+        constraint FK3YOV0AB7903KTH6NEAVO1SN0M
+            references WYPL.REPETITION
+)
+/
 
-create table schedule
+create table WYPL.MEMBER_SCHEDULE
 (
-    group_id      integer,
-    label_id      integer,
-    repetition_id integer,
-    schedule_id   integer                 not null auto_increment,
-    created_at    datetime(6)             not null,
-    deleted_at    datetime(6),
-    end_date      datetime(6)             not null,
-    modified_at   datetime(6)             not null,
-    start_date    datetime(6)             not null,
-    title         varchar(50)             not null,
-    description   varchar(255),
-    category      enum ('MEMBER','GROUP') not null,
-    primary key (schedule_id)
-) engine = InnoDB;
+    MEMBER_SCHEDULE_ID NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT         TIMESTAMP(6) not null,
+    DELETED_AT         TIMESTAMP(6),
+    MODIFIED_AT        TIMESTAMP(6) not null,
+    WRITE_REVIEW       NUMBER(1)    not null
+        check (write_review in (0, 1)),
+    MEMBER_ID          NUMBER(10)   not null
+        constraint FKJMXJH6TT9UEGMKEB6KQN7XOJ5
+            references WYPL.MEMBER,
+    SCHEDULE_ID        NUMBER(10)   not null
+        constraint FK85H38V1N4LGWDT3XI0MFUJEW3
+            references WYPL.SCHEDULE
+)
+/
 
-create table side_tab
+create table WYPL.REVIEW
 (
-    d_day     date,
-    member_id integer not null,
-    title     varchar(20),
-    goal      varchar(60),
-    memo      varchar(1000),
-    primary key (member_id)
-) engine = InnoDB;
+    REVIEW_ID          NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT         TIMESTAMP(6)      not null,
+    DELETED_AT         TIMESTAMP(6),
+    MODIFIED_AT        TIMESTAMP(6)      not null,
+    TITLE              VARCHAR2(50 char) not null,
+    MEMBER_SCHEDULE_ID NUMBER(10)
+        constraint FKF62I7G0KY07AC1YYI9UXIJ02U
+            references WYPL.MEMBER_SCHEDULE
+)
+/
 
-create table social_member
+create table WYPL.SIDE_TAB
 (
-    member_id      integer         not null,
-    oauth_id       varchar(255)    not null,
-    oauth_provider enum ('GOOGLE') not null,
-    primary key (member_id)
-) engine = InnoDB;
+    MEMBER_ID NUMBER(10) not null
+        primary key
+        constraint FKFPJ8OCC9LG157T785RS51G6OU
+            references WYPL.MEMBER,
+    TITLE     VARCHAR2(20 char),
+    D_DAY     DATE,
+    GOAL      VARCHAR2(60 char),
+    MEMO      VARCHAR2(1000 char)
+)
+/
 
-create table group_tbl
+create table WYPL.SOCIAL_MEMBER
 (
-    group_id    integer     not null auto_increment,
-    owner_id    integer     not null,
-    created_at  datetime(6) not null,
-    deleted_at  datetime(6),
-    modified_at datetime(6) not null,
-    name        varchar(20) not null,
-    description varchar(50),
-    primary key (group_id)
-) engine = InnoDB;
+    MEMBER_ID      NUMBER(10)         not null
+        primary key
+        constraint FKKREQGRXO2Y1KX1FTDHKDM7K24
+            references WYPL.MEMBER,
+    OAUTH_ID       VARCHAR2(255 char) not null,
+    OAUTH_PROVIDER VARCHAR2(255 char) not null
+        check (oauth_provider in ('GOOGLE'))
+)
+/
 
-create table todo
+create table WYPL.TODO
 (
-    is_completed bit default false not null,
-    member_id    integer,
-    todo_id      integer           not null auto_increment,
-    created_at   datetime(6)       not null,
-    deleted_at   datetime(6),
-    modified_at  datetime(6)       not null,
-    content      varchar(765)      not null,
-    primary key (todo_id)
-) engine = InnoDB;
-
-alter table member
-    add constraint UK_mbmcqelty0fbrvxp1q58dn57t unique (email);
-
-alter table member_group
-    add constraint FKig0052fud399pxbsu3fxf9lar
-        foreign key (group_id)
-            references group_tbl (group_id);
-
-alter table member_group
-    add constraint FKi9080rfwtrt5jlvim4mcg4rl4
-        foreign key (member_id)
-            references member (member_id);
-
-alter table member_schedule
-    add constraint FKjmxjh6tt9uegmkeb6kqn7xoj5
-        foreign key (member_id)
-            references member (member_id);
-
-alter table member_schedule
-    add constraint FK85h38v1n4lgwdt3xi0mfujew3
-        foreign key (schedule_id)
-            references schedule (schedule_id);
-
-alter table review
-    add constraint FKf62i7g0ky07ac1yyi9uxij02u
-        foreign key (member_schedule_id)
-            references member_schedule (member_schedule_id);
-
-alter table schedule
-    add constraint FKjclesvygb0q6kb7wp9sg9fg43
-        foreign key (label_id)
-            references label (label_id);
-
-alter table schedule
-    add constraint FK3yov0ab7903kth6neavo1sn0m
-        foreign key (repetition_id)
-            references repetition (repetition_id);
-
-alter table side_tab
-    add constraint FKfpj8occ9lg157t785rs51g6ou
-        foreign key (member_id)
-            references member (member_id);
-
-alter table social_member
-    add constraint FKkreqgrxo2y1kx1ftdhkdm7k24
-        foreign key (member_id)
-            references member (member_id);
-
-alter table group_tbl
-    add constraint FKjyrllihwtp18idx6qdnkg24tf
-        foreign key (owner_id)
-            references member (member_id);
-
-alter table todo
-    add constraint FK67o67f2ave0yd2pb137aoh603
-        foreign key (member_id)
-            references member (member_id);
+    TODO_ID      NUMBER(10) generated as identity
+        primary key,
+    CREATED_AT   TIMESTAMP(6)       not null,
+    DELETED_AT   TIMESTAMP(6),
+    MODIFIED_AT  TIMESTAMP(6)       not null,
+    CONTENT      VARCHAR2(765 char) not null,
+    IS_COMPLETED NUMBER(1)          not null
+        check (is_completed in (0, 1)),
+    MEMBER_ID    NUMBER(10)
+        constraint FK67O67F2AVE0YD2PB137AOH603
+            references WYPL.MEMBER
+)
+/
