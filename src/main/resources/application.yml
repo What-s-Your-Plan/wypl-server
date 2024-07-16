@@ -6,7 +6,7 @@ spring:
       - security/application-jwt.yml
       - security/application-logging.yml
       - security/application-mongo.yml
-      - security/application-mysql.yml
+      - security/application-oracle.yml
       - security/application-oauth.yml
       - security/application-redis.yml
       - security/application-s3.yml

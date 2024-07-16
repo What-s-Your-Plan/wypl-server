@@ -47,10 +47,12 @@ dependencies {
 
     /* Database */
     runtimeOnly("com.mysql:mysql-connector-j")
+    runtimeOnly("com.oracle.database.jdbc:ojdbc11")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-oracle")
     implementation("org.flywaydb:flyway-mysql")
 
     /* QueryDSL */
