@@ -52,6 +52,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.flywaydb:flyway-core")
+    implementation("org.flywaydb:flyway-database-oracle")
     implementation("org.flywaydb:flyway-mysql")
 
     /* QueryDSL */
