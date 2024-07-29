@@ -36,7 +36,6 @@ import com.butter.wypl.review.fixture.ReviewContentsFixture;
 import com.butter.wypl.review.fixture.ReviewFixture;
 import com.butter.wypl.review.service.ReviewModifyService;
 import com.butter.wypl.review.service.ReviewReadService;
-import com.butter.wypl.schedule.domain.MemberSchedule;
 import com.butter.wypl.schedule.domain.Schedule;
 import com.butter.wypl.schedule.fixture.ScheduleFixture;
 

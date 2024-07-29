@@ -12,6 +12,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.butter.wypl.group.data.response.GroupMemberColorUpdateResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,6 @@ import com.butter.wypl.group.data.request.GroupMemberInviteRequest;
 import com.butter.wypl.group.data.request.GroupUpdateRequest;
 import com.butter.wypl.group.data.request.MemberIdRequest;
 import com.butter.wypl.group.data.response.GroupIdResponse;
-import com.butter.wypl.group.data.response.GroupMemberColorUpdateResponse;
 import com.butter.wypl.group.data.response.GroupResponse;
 import com.butter.wypl.group.data.response.MemberIdResponse;
 import com.butter.wypl.group.domain.Group;
@@ -162,7 +162,7 @@ public class GroupModifyServiceImpl implements GroupModifyService {
 
 	@Override
 	public GroupMemberColorUpdateResponse updateGroupColor(int memberId, int groupId,
-		GroupMemberColorUpdateRequest request) {
+														   GroupMemberColorUpdateRequest request) {
 		Color color = request.color();
 		MemberGroup foundMemberGroup = getMemberGroup(memberId, groupId);
 		foundMemberGroup.updateColor(color);

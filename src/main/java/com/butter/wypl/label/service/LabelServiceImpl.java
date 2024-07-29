@@ -33,13 +33,7 @@ public class LabelServiceImpl implements LabelReadService, LabelModifyService {
 	@Transactional
 	@Override
 	public LabelResponse createLabel(int memberId, LabelRequest labelRequest) {
-		Label label = Label.builder()
-			.title(labelRequest.title())
-			.color(labelRequest.color())
-			.memberId(memberId)
-			.schedules(new ArrayList<>())
-			.build();
-
+		Label label = null;
 		labelRepository.save(label);
 
 		return LabelResponse.from(label);
@@ -97,7 +91,7 @@ public class LabelServiceImpl implements LabelReadService, LabelModifyService {
 	private Label checkValidationAndGetLabel(int labelId, int memberId) {
 		Label label = LabelServiceUtils.getLabelByLabelId(labelRepository, labelId);
 
-		if (label.getMemberId() != memberId) {
+		if (label.getMember().getId() != memberId) {
 			throw new LabelException(LabelErrorCode.NO_PERMISSION_UPDATE);
 		}
 

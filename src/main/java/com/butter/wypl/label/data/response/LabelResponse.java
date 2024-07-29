@@ -20,7 +20,7 @@ public record LabelResponse(
 
 		return new LabelResponse(
 			label.getLabelId(),
-			label.getMemberId(),
+			label.getMember().getId(),
 			label.getTitle(),
 			label.getColor()
 		);

@@ -10,6 +10,7 @@ import com.butter.wypl.global.common.Color;
 import com.butter.wypl.group.exception.GroupException;
 import com.butter.wypl.member.domain.Member;
 
+import com.butter.wypl.schedule.domain.ScheduleInfo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -29,14 +30,14 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Entity
-@Table(name = "groups")
+@Table(name = "group_tbl")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Group extends BaseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "group_id")
-	private int id;
+	private Integer id;
 
 	@Column(name = "name", length = 20, nullable = false)
 	private String name;
@@ -51,6 +52,9 @@ public class Group extends BaseEntity {
 
 	@OneToMany(mappedBy = "group")
 	private List<MemberGroup> memberGroups;
+
+	@OneToMany(mappedBy = "group")
+	private List<ScheduleInfo> scheduleInfos;
 
 	@Builder
 	private Group(String name, Color color, Member owner) {

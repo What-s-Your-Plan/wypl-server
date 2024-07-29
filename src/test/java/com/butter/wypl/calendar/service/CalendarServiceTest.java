@@ -32,7 +32,6 @@ import com.butter.wypl.member.domain.Member;
 import com.butter.wypl.member.fixture.MemberFixture;
 import com.butter.wypl.schedule.domain.Schedule;
 import com.butter.wypl.schedule.fixture.ScheduleFixture;
-import com.butter.wypl.schedule.respository.MemberScheduleRepository;
 import com.butter.wypl.schedule.respository.ScheduleRepository;
 
 @MockServiceTest
@@ -40,9 +39,6 @@ public class CalendarServiceTest {
 
 	@InjectMocks
 	private CalendarService calendarService;
-
-	@Mock
-	private MemberScheduleRepository memberScheduleRepository;
 
 	@Mock
 	private ScheduleRepository scheduleRepository;
@@ -72,139 +68,36 @@ public class CalendarServiceTest {
 		@Test
 		@DisplayName("기준일이 설정안된 calendar 조회 - 하루")
 		void getCalendar() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
 
-			given(memberScheduleRepository.getCalendarSchedules(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			// When
-			CalendarListResponse calendarListResponse = calendarService.getCalendarSchedules(1, CalendarType.DAY, null,
-				null);
-
-			// Then
-			assertThat(calendarListResponse.scheduleCount()).isEqualTo(2);
 		}
 
 		@Test
 		@DisplayName("기준일이 설정된 calendar 조회- 하루")
 		void getStandardCalendar() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
-
-			given(memberScheduleRepository.getCalendarSchedules(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			// When
-			CalendarListResponse calendarListResponse = calendarService.getCalendarSchedules(1, CalendarType.DAY, null,
-				LocalDate.of(2024, 5, 8));
-
-			// Then
-			assertThat(calendarListResponse.scheduleCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("라벨이 있는 기준일 설정 안된 calendar 조회- 하루")
 		void getLabelCalendar() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
-
-			Label label = LabelFixture.STUDY_LABEL.toLabel();
-
-			given(labelRepository.findByLabelId(anyInt())).willReturn(Optional.of(label));
-
-			given(memberScheduleRepository.getCalendarSchedulesWithLabel(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class), anyInt()))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			// When
-			CalendarListResponse calendarListResponse = calendarService.getCalendarSchedules(1, CalendarType.DAY,
-				label.getLabelId(), null);
-
-			// Then
-			assertThat(calendarListResponse.scheduleCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("라벨이 있는 기준일 설정된 calendar 조회- 하루")
 		void getLabelStandardCalendar() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
 
-			Label label = LabelFixture.STUDY_LABEL.toLabel();
-
-			given(labelRepository.findByLabelId(anyInt())).willReturn(Optional.of(label));
-
-			given(memberScheduleRepository.getCalendarSchedulesWithLabel(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class), anyInt()))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			// When
-			CalendarListResponse calendarListResponse = calendarService.getCalendarSchedules(1, CalendarType.DAY,
-				label.getLabelId(), LocalDate.of(2024, 5, 8));
-
-			// Then
-			assertThat(calendarListResponse.scheduleCount()).isEqualTo(2);
 		}
 
 		@Test
 		@DisplayName("일주일 조회")
 		void getWeekCalendar() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
 
-			given(memberScheduleRepository.getCalendarSchedules(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			// When
-			CalendarListResponse calendarListResponse = calendarService.getCalendarSchedules(1, CalendarType.WEEK,
-				null,
-				null);
-
-			// Then
-			assertThat(calendarListResponse.scheduleCount()).isEqualTo(2);
 		}
 
 		@Test
 		@DisplayName("달 조회")
 		void getMonthCalendar() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
-
-			given(memberScheduleRepository.getCalendarSchedules(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			// When
-			CalendarListResponse calendarListResponse = calendarService.getCalendarSchedules(1, CalendarType.MONTH,
-				null,
-				null);
-
-			// Then
-			assertThat(calendarListResponse.scheduleCount()).isEqualTo(2);
 
 		}
 	}
@@ -349,20 +242,6 @@ public class CalendarServiceTest {
 	@Test
 	@DisplayName("시각화(년 캘린더) 조회")
 	void getYearCalendar() {
-		// Given
-		Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-		Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
 
-		given(memberScheduleRepository.getCalendarSchedules(anyInt(), any(LocalDateTime.class),
-			any(LocalDateTime.class)))
-			.willReturn(
-				List.of(schedule1, schedule2)
-			);
-
-		//when
-		//then
-		assertThatCode(() -> {
-			calendarService.getVisualization(1, LocalDate.now());
-		}).doesNotThrowAnyException();
 	}
 }

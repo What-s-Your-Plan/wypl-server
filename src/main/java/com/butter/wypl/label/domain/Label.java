@@ -2,6 +2,9 @@ package com.butter.wypl.label.domain;
 
 import java.util.List;
 
+import com.butter.wypl.member.domain.Member;
+import com.butter.wypl.schedule.domain.ScheduleInfo;
+import jakarta.persistence.*;
 import org.hibernate.annotations.SQLRestriction;
 
 import com.butter.wypl.global.common.BaseEntity;
@@ -10,24 +13,16 @@ import com.butter.wypl.label.exception.LabelErrorCode;
 import com.butter.wypl.label.exception.LabelException;
 import com.butter.wypl.schedule.domain.Schedule;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @SQLRestriction("deleted_at is null")
+@Table(name = "label_tbl")
 public class Label extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,26 +36,21 @@ public class Label extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private Color color;
 
-	@Column(name = "member_id", nullable = false)
-	private int memberId;
-
-	@OneToMany(mappedBy = "label")
-	private List<Schedule> schedules;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
+	private Member member;
 
 	@Builder
-	public Label(int labelId, String title, Color color, int memberId, List<Schedule> schedules) {
+	public Label(int labelId, String title, Color color, Member member) {
 		titleValidation(title);
-
 		this.labelId = labelId;
 		this.title = title;
 		this.color = color;
-		this.memberId = memberId;
-		this.schedules = schedules;
+		this.member = member;
 	}
 
 	public void update(String title, Color color) {
 		titleValidation(title);
-
 		this.title = title;
 		this.color = color;
 	}

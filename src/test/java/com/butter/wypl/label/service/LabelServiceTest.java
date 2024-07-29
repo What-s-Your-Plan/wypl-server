@@ -40,14 +40,14 @@ public class LabelServiceTest {
 
 			//when
 			LabelResponse savedLabel = labelService.createLabel(
-				label.getMemberId(),
+				label.getMember().getId(),
 				new LabelRequest(label.getTitle(), label.getColor())
 			);
 
 			//then
 			assertThat(savedLabel).isNotNull();
 			assertThat(savedLabel.labelId()).isGreaterThan(0);
-			assertThat(savedLabel.memberId()).isEqualTo(label.getMemberId());
+			assertThat(savedLabel.memberId()).isEqualTo(label.getMember().getId());
 			assertThat(savedLabel.title()).isEqualTo(label.getTitle());
 			assertThat(savedLabel.color()).isEqualTo(label.getColor());
 		}
@@ -62,7 +62,7 @@ public class LabelServiceTest {
 			//then
 			assertThatThrownBy(() -> {
 				labelService.createLabel(
-					label.getMemberId(),
+					label.getMember().getId(),
 					new LabelRequest(null, label.getColor())
 				);
 			}).isInstanceOf(LabelException.class)
@@ -81,7 +81,7 @@ public class LabelServiceTest {
 		void init() {
 			label = LabelFixture.STUDY_LABEL.toLabel();
 			savedLabel = labelService.createLabel(
-				label.getMemberId(),
+				label.getMember().getId(),
 				new LabelRequest(label.getTitle(), label.getColor())
 			);
 		}
@@ -92,13 +92,13 @@ public class LabelServiceTest {
 			//given
 			//when
 			LabelResponse updatedLabel = labelService.updateLabel(
-				label.getMemberId(),
+				label.getMember().getId(),
 				savedLabel.labelId(),
 				new LabelRequest("바뀐 제목", Color.labelBlue));
 
 			//then
 			assertThat(updatedLabel.labelId()).isEqualTo(savedLabel.labelId());
-			assertThat(updatedLabel.memberId()).isEqualTo(label.getMemberId());
+			assertThat(updatedLabel.memberId()).isEqualTo(label.getMember().getId());
 			assertThat(updatedLabel.title()).isEqualTo("바뀐 제목");
 			assertThat(updatedLabel.color()).isEqualTo(Color.labelBlue);
 		}
@@ -110,7 +110,7 @@ public class LabelServiceTest {
 			//when
 			//then
 			assertThatThrownBy(() -> {
-				labelService.updateLabel(label.getMemberId(), savedLabel.labelId(),
+				labelService.updateLabel(label.getMember().getId(), savedLabel.labelId(),
 					new LabelRequest(null, Color.labelBlue));
 			}).isInstanceOf(LabelException.class)
 				.hasMessageContaining(LabelErrorCode.NOT_APPROPRIATE_TITLE.getMessage());
@@ -142,7 +142,7 @@ public class LabelServiceTest {
 			//given
 			Label label = LabelFixture.STUDY_LABEL.toLabel();
 			LabelResponse savedLabel = labelService.createLabel(
-				label.getMemberId(),
+				label.getMember().getId(),
 				new LabelRequest(label.getTitle(), label.getColor())
 			);
 
@@ -163,7 +163,7 @@ public class LabelServiceTest {
 			//given
 			Label label = LabelFixture.STUDY_LABEL.toLabel();
 			LabelResponse savedLabel = labelService.createLabel(
-				label.getMemberId(),
+				label.getMember().getId(),
 				new LabelRequest(label.getTitle(), label.getColor())
 			);
 
@@ -196,15 +196,15 @@ public class LabelServiceTest {
 		void getLabelByMemberId() {
 			//given
 			Label label1 = LabelFixture.STUDY_LABEL.toLabel();
-			labelService.createLabel(label1.getMemberId(),
+			labelService.createLabel(label1.getMember().getId(),
 				new LabelRequest(label1.getTitle(), label1.getColor()));
 
 			Label label2 = LabelFixture.STUDY_LABEL.toLabel();
-			labelService.createLabel(label2.getMemberId(),
+			labelService.createLabel(label2.getMember().getId(),
 				new LabelRequest(label2.getTitle(), label2.getColor()));
 
 			//when
-			LabelListResponse result = labelService.getLabelsByMemberId(label1.getMemberId());
+			LabelListResponse result = labelService.getLabelsByMemberId(label1.getMember().getId());
 
 			//then
 			assertThat(result.labelCount()).isEqualTo(2);

@@ -6,5 +6,5 @@ import com.butter.wypl.review.domain.ReviewContents;
 
 public interface ReviewContentsRepository extends MongoRepository<ReviewContents, String> {
 
-	ReviewContents findByReviewIdAndDeletedAtNull(int reviewId);
+//	ReviewContents findByReviewIdAndDeletedAtNull(int reviewId);
 }

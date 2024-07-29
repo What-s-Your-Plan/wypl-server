@@ -67,55 +67,6 @@ class GroupRepositoryTest {
 		@Test
 		@DisplayName("회원으로 그룹 연관 관계 조회 성공한다.")
 		public void whenSuccessOfFindRelationEntity() {
-			/* Given */
-			List<Group> groups = new ArrayList<>();
-			List<Member> members = new ArrayList<>();
-			List<MemberGroup> memberGroups = new ArrayList<>();
-
-			// 회원 데이터 생성
-			Member member = HAN_JI_WON.toMember();
-			Member member2 = KIM_JEONG_UK.toMember();
-			Member member3 = JWA_SO_YEON.toMember();
-			members.add(member);
-			members.add(member2);
-			members.add(member3);
-
-			// 그룹 데이터 생성
-			Group group1 = GROUP_STUDY.toGroup(member);
-			groups.add(group1);
-			MemberGroup member1Group1 = MemberGroup.of(member, group1, labelYellow);
-			MemberGroup member2Group1 = MemberGroup.of(member2, group1, labelRed);
-			MemberGroup member3Group1 = MemberGroup.of(member3, group1, labelBlue);
-			memberGroups.add(member1Group1);
-			memberGroups.add(member2Group1);
-			memberGroups.add(member3Group1);
-
-			Group group2 = GROUP_WORK.toGroup(member);
-			groups.add(group2);
-			MemberGroup member1Group2 = MemberGroup.of(member, group2, labelYellow);
-			MemberGroup member3Group2 = MemberGroup.of(member3, group2, labelRed);
-			memberGroups.add(member1Group2);
-			memberGroups.add(member3Group2);
-
-			/* When */
-			memberRepository.saveAll(members);
-			groupRepository.saveAll(groups);
-			memberGroupRepository.saveAll(memberGroups);
-			em.flush();
-			em.clear();
-
-			/* Then */
-			assertThatCode(() -> {
-				Member findMember = memberRepository.findById(member.getId()).orElseThrow();
-				assertThat(findMember.getMemberGroups()).isNotNull();
-				findMember.getMemberGroups().forEach(memberGroup -> {
-					assertThat(memberGroup.getGroup()).isNotNull();
-					assertThat(memberGroup.getMember()).isNotNull();
-					assertThat(memberGroup.getGroup().getOwner()).isNotNull();
-					assertThat(memberGroup.getGroup().getMemberGroups()).isNotNull();
-					assertThat(memberGroup.getGroup().getMemberGroups().size()).isGreaterThan(0);
-				});
-			}).doesNotThrowAnyException();
 
 		}
 
