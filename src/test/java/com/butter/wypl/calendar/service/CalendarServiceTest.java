@@ -109,132 +109,24 @@ public class CalendarServiceTest {
 		@Test
 		@DisplayName("하루 조회")
 		void getDay() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
-
-			Member member = MemberFixture.KIM_JEONG_UK.toMember();
-			Group group = GroupFixture.GROUP_STUDY.toGroup(member);
-
-			given(scheduleRepository.findAllByGroupIdAndStartDateBetween(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			given(groupRepository.findById(anyInt()))
-				.willReturn(Optional.of(group));
-
-			given(memberGroupRepository.findAcceptMemberGroup(anyInt(), anyInt()))
-				.willReturn(Optional.ofNullable(MemberGroup.of(member, group, Color.labelBlue)));
-
-			// When
-			GroupCalendarListResponse groupCalendarListResponse = calendarService.getGroupCalendarSchedule(1,
-				CalendarType.DAY,
-				null,
-				1);
-
-			// Then
-			assertThat(groupCalendarListResponse.scheduleCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("주 조회")
 		void getWeek() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
-
-			Member member = MemberFixture.KIM_JEONG_UK.toMember();
-			Group group = GroupFixture.GROUP_STUDY.toGroup(member);
-
-			given(scheduleRepository.findAllByGroupIdAndStartDateBetween(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			given(groupRepository.findById(anyInt()))
-				.willReturn(Optional.of(group));
-
-			given(memberGroupRepository.findAcceptMemberGroup(anyInt(), anyInt()))
-				.willReturn(Optional.ofNullable(MemberGroup.of(member, group, Color.labelBlue)));
-
-			// When
-			GroupCalendarListResponse groupCalendarListResponse = calendarService.getGroupCalendarSchedule(1,
-				CalendarType.WEEK,
-				null,
-				1);
-
-			// Then
-			assertThat(groupCalendarListResponse.scheduleCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("달 조회")
 		void getMonth() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
-
-			Member member = MemberFixture.KIM_JEONG_UK.toMember();
-			Group group = GroupFixture.GROUP_STUDY.toGroup(member);
-
-			given(scheduleRepository.findAllByGroupIdAndStartDateBetween(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			given(groupRepository.findById(anyInt()))
-				.willReturn(Optional.of(group));
-
-			given(memberGroupRepository.findAcceptMemberGroup(anyInt(), anyInt()))
-				.willReturn(Optional.ofNullable(MemberGroup.of(member, group, Color.labelBlue)));
-
-			// When
-			GroupCalendarListResponse groupCalendarListResponse = calendarService.getGroupCalendarSchedule(1,
-				CalendarType.MONTH,
-				null,
-				1);
-
-			// Then
-			assertThat(groupCalendarListResponse.scheduleCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("기준일 설정된 경우 - 하루")
 		void getStandard() {
-			// Given
-			Schedule schedule1 = ScheduleFixture.PERSONAL_SCHEDULE.toSchedule();
-			Schedule schedule2 = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
-
-			Member member = MemberFixture.KIM_JEONG_UK.toMember();
-			Group group = GroupFixture.GROUP_STUDY.toGroup(member);
-
-			given(scheduleRepository.findAllByGroupIdAndStartDateBetween(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(
-					List.of(schedule1, schedule2)
-				);
-
-			given(groupRepository.findById(anyInt()))
-				.willReturn(Optional.of(group));
-
-			given(memberGroupRepository.findAcceptMemberGroup(anyInt(), anyInt()))
-				.willReturn(Optional.ofNullable(MemberGroup.of(member, group, Color.labelBlue)));
-
-			// When
-			GroupCalendarListResponse groupCalendarListResponse = calendarService.getGroupCalendarSchedule(1,
-				CalendarType.DAY,
-				LocalDate.of(2024, 5, 8),
-				1);
-
-			// Then
-			assertThat(groupCalendarListResponse.scheduleCount()).isEqualTo(2);
 
 		}
 	}

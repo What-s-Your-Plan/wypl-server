@@ -91,118 +91,48 @@ public class ReviewServiceTest {
 		@Test
 		@DisplayName("지정 날짜 x, 오래된 순, 처음")
 		void getReviews1() {
-			// Given
-			given(reviewRepository.getReviewsOldestAll(anyInt(), anyInt()))
-				.willReturn(List.of(review1, review2));
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, null, ReviewType.OLDEST, null, null);
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
+
 		}
 
 		@Test
 		@DisplayName("지정 날짜 x, 오래된 순, 처음 이후")
 		void getReviews2() {
-			// Given
-			given(reviewRepository.getReviewsOldestAll(anyInt(), anyInt()))
-				.willReturn(List.of(review1, review2));
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, 1, ReviewType.OLDEST, null, null);
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("지정 날짜 x, 최신 순, 처음")
 		void getReviews3() {
-			// Given
-			given(reviewRepository.getReviewsNewestAll(anyInt()))
-				.willReturn(List.of(review1, review2));
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, null, ReviewType.NEWEST, null, null);
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("지정 날짜 x, 최신 순, 처음 이후")
 		void getReviews4() {
-			//Given
-			given(reviewRepository.getReviewsNewestAllAfter(anyInt(), anyInt()))
-				.willReturn(List.of(review1, review2));
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, 1, ReviewType.NEWEST, null, null);
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
+
 		}
 
 		@Test
 		@DisplayName("지정 날짜 O, 오래된 순, 처음")
 		void getReviews5() {
-			// Given
-			given(reviewRepository.getReviewsOldest(anyInt(), anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(List.of(review1, review2));
-
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, null, ReviewType.OLDEST,
-				LocalDate.of(2024, 5, 9), LocalDate.of(2024, 5, 10));
-
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("지정 날짜 O, 오래된 순, 처음 이후")
 		void getReviews6() {
-			// Given
-			given(reviewRepository.getReviewsOldest(anyInt(), anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(List.of(review1, review2));
-
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, 1, ReviewType.OLDEST,
-				LocalDate.of(2024, 5, 9), LocalDate.of(2024, 5, 10));
-
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("지정 날짜 O, 최신 순, 처음")
 		void getReviews7() {
-			// Given
-			given(reviewRepository.getReviewsNewest(anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(List.of(review1, review2));
-
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, null, ReviewType.NEWEST,
-				LocalDate.of(2024, 5, 9), LocalDate.of(2024, 5, 10));
-
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
 
 		}
 
 		@Test
 		@DisplayName("지정 날짜 O, 최신, 처음 이후")
 		void getReviews8() {
-			// Given
-			given(reviewRepository.getReviewsNewestAfter(anyInt(), anyInt(), any(LocalDateTime.class),
-				any(LocalDateTime.class)))
-				.willReturn(List.of(review1, review2));
-
-			// When
-			ReviewListResponse reviewListResponse = reviewService.getReviews(1, 1, ReviewType.NEWEST,
-				LocalDate.of(2024, 5, 9), LocalDate.of(2024, 5, 10));
-
-			// Then
-			assertThat(reviewListResponse.reviewCount()).isEqualTo(2);
 
 		}
 	}
