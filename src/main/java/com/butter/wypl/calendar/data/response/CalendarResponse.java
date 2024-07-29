@@ -30,15 +30,6 @@ public record CalendarResponse(
 ) {
 
 	public static CalendarResponse of(Schedule schedule, MemberGroup memberGroup) {
-		return new CalendarResponse(
-			schedule.getScheduleId(),
-			schedule.getTitle(),
-			schedule.getDescription(),
-			schedule.getCategory(),
-			schedule.getStartDate(),
-			schedule.getEndDate(),
-			LabelResponse.from(schedule.getLabel()),
-			memberGroup == null ? null : GroupResponse.from(memberGroup)
-		);
+		return null;
 	}
 }

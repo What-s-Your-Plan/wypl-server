@@ -20,7 +20,7 @@ public class LabelTest {
 		label.update("제목 바뀜", Color.labelBrown);
 
 		//then
-		assertThat(label.getMemberId()).isEqualTo(LabelFixture.STUDY_LABEL.toLabel().getMemberId());
+		assertThat(label.getMember().getId()).isEqualTo(LabelFixture.STUDY_LABEL.toLabel().getMember().getId());
 		assertThat(label.getTitle()).isEqualTo("제목 바뀜");
 		assertThat(label.getColor()).isEqualTo(Color.labelBrown);
 	}

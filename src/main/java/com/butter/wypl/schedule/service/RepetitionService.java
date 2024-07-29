@@ -17,16 +17,17 @@ public class RepetitionService {
 
 	@Transactional
 	public Repetition createRepetition(Repetition repetition) {
-		return repetitionRepository.save(repetition);
+//		return repetitionRepository.save(repetition);
+		return null;
 	}
 
 	@Transactional
 	public void deleteRepetition(Repetition repetition) {
-		if (repetition == null) {
-			return;
-		}
-
-		repetition.delete();
+//		if (repetition == null) {
+//			return;
+//		}
+//
+//		repetition.delete();
 	}
 
 }

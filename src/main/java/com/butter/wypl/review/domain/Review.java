@@ -1,21 +1,15 @@
 package com.butter.wypl.review.domain;
 
+import com.butter.wypl.member.domain.Member;
+import com.butter.wypl.schedule.domain.ScheduleInfo;
+import jakarta.persistence.*;
 import org.hibernate.annotations.SQLRestriction;
 
 import com.butter.wypl.global.common.BaseEntity;
 import com.butter.wypl.review.data.request.ReviewCreateRequest;
 import com.butter.wypl.review.exception.ReviewErrorCode;
 import com.butter.wypl.review.exception.ReviewException;
-import com.butter.wypl.schedule.domain.MemberSchedule;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +19,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @SQLRestriction("deleted_at is null")
+@Table(name = "review_tbl")
 public class Review extends BaseEntity {
 
 	@Id
@@ -32,41 +27,38 @@ public class Review extends BaseEntity {
 	@Column(name = "review_id")
 	private int reviewId;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "member_id")
+	private Member member;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "schedule_info_id")
+	private ScheduleInfo scheduleInfo;
+
 	@Column(nullable = false, length = 50)
 	private String title;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "member_schedule_id")
-	private MemberSchedule memberSchedule;
 
 	@Builder
-	public Review(int reviewId, String title, MemberSchedule memberSchedule) {
+	public Review(int reviewId, String title) {
 		validateTitle(title);
-
 		this.reviewId = reviewId;
 		this.title = title;
-		this.memberSchedule = memberSchedule;
 	}
 
-	public static Review of(ReviewCreateRequest reviewCreateRequest, MemberSchedule memberSchedule) {
+	public static Review of(ReviewCreateRequest reviewCreateRequest) {
 		return Review.builder()
 			.title(reviewCreateRequest.title())
-			.memberSchedule(memberSchedule)
 			.build();
 	}
 
 	public void updateTitle(String title) {
 		validateTitle(title);
-
 		this.title = title;
 	}
 
-	public int getMemberId() {
-		return memberSchedule.getMember().getId();
-	}
-
 	public void validationOwnerByMemberId(int memberId) {
-		if (getMemberId() != memberId) {
+		if (member.getId() != memberId) {
 			throw new ReviewException(ReviewErrorCode.NOT_PERMISSION_TO_REVIEW);
 		}
 	}

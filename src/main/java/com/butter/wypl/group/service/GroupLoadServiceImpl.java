@@ -3,10 +3,10 @@ package com.butter.wypl.group.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.butter.wypl.group.data.response.FindGroupMembersResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.butter.wypl.group.data.response.FindGroupMembersResponse;
 import com.butter.wypl.group.data.response.FindGroupsResponse;
 import com.butter.wypl.group.domain.GroupInviteState;
 import com.butter.wypl.group.domain.MemberGroup;

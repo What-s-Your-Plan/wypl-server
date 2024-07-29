@@ -38,17 +38,6 @@ public record ScheduleResponse(
 		Schedule schedule,
 		List<Member> members
 	) {
-		return new ScheduleResponse(
-			schedule.getScheduleId(),
-			schedule.getTitle(),
-			schedule.getDescription(),
-			schedule.getStartDate(),
-			schedule.getEndDate(),
-			schedule.getCategory(),
-			schedule.getGroupId(),
-			(schedule.getLabel() == null) ? null : LabelResponse.from(schedule.getLabel()),
-			members.size(),
-			MemberResponse.from(members)
-		);
+		return null;
 	}
 }

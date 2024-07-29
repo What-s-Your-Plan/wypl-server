@@ -205,17 +205,7 @@ public class ScheduleControllerTest extends ControllerTest {
 		//given
 		Schedule schedule = ScheduleFixture.LABEL_REPEAT_PERSONAL_SCHEDULE.toSchedule();
 		String json = convertToJson(
-			new ScheduleCreateRequest(
-				schedule.getTitle(),
-				schedule.getDescription(),
-				schedule.getStartDate(),
-				schedule.getEndDate(),
-				schedule.getCategory(),
-				schedule.getGroupId(),
-				schedule.getRepetition() == null ? null : RepetitionRequest.from(schedule.getRepetition()),
-				schedule.getLabel().getLabelId(),
-				List.of(new MemberIdResponse(1))
-			)
+			null
 		);
 
 		given(scheduleModifyService.createSchedule(anyInt(), any(ScheduleCreateRequest.class)))
@@ -334,17 +324,7 @@ public class ScheduleControllerTest extends ControllerTest {
 		//given
 		Schedule schedule = ScheduleFixture.LABEL_PERSONAL_SCHEDULE.toSchedule();
 		String json = convertToJson(
-			new ScheduleCreateRequest(
-				schedule.getTitle(),
-				schedule.getDescription(),
-				schedule.getStartDate(),
-				schedule.getEndDate(),
-				schedule.getCategory(),
-				schedule.getGroupId(),
-				schedule.getRepetition() == null ? null : RepetitionRequest.from(schedule.getRepetition()),
-				schedule.getLabel().getLabelId(),
-				List.of(new MemberIdResponse(1))
-			)
+			null
 		);
 
 		given(scheduleModifyService.updateSchedule(anyInt(), anyInt(), any(ScheduleUpdateRequest.class)))

@@ -31,14 +31,6 @@ public record GroupCalendarResponse(
 ) {
 
 	public static GroupCalendarResponse of(Schedule schedule, List<Member> members) {
-		return new GroupCalendarResponse(
-			schedule.getScheduleId(),
-			schedule.getTitle(),
-			schedule.getCategory(),
-			schedule.getStartDate(),
-			schedule.getEndDate(),
-			members.size(),
-			members.stream().map(MemberResponse::from).toList()
-		);
+		return null;
 	}
 }

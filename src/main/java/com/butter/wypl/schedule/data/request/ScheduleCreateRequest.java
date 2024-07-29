@@ -35,28 +35,10 @@ public record ScheduleCreateRequest(
 ) {
 
 	public Schedule toEntity(Label label) {
-		return Schedule.builder()
-			.title(title)
-			.description(description)
-			.startDate(startDate)
-			.endDate(endDate)
-			.category(category)
-			.groupId(groupId)
-			.label(label)
-			.build();
+		return null;
 	}
 
 	public static ScheduleCreateRequest of(Schedule schedule, List<MemberIdResponse> members) {
-		return new ScheduleCreateRequest(
-			schedule.getTitle(),
-			schedule.getDescription(),
-			schedule.getStartDate(),
-			schedule.getEndDate(),
-			schedule.getCategory(),
-			schedule.getGroupId(),
-			schedule.getRepetition() == null ? null : RepetitionRequest.from(schedule.getRepetition()),
-			schedule.getLabel() == null ? null : schedule.getLabel().getLabelId(),
-			members
-		);
+		return null;
 	}
 }

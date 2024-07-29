@@ -8,17 +8,12 @@ import com.butter.wypl.global.common.BaseEntity;
 import com.butter.wypl.global.common.Color;
 import com.butter.wypl.group.domain.MemberGroup;
 import com.butter.wypl.infrastructure.weather.WeatherRegion;
+import com.butter.wypl.label.domain.Label;
 import com.butter.wypl.member.exception.MemberErrorCode;
 import com.butter.wypl.member.exception.MemberException;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import com.butter.wypl.schedule.domain.ScheduleInfo;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +25,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(name = "member_tbl")
 public class Member extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,6 +54,12 @@ public class Member extends BaseEntity {
 	
 	@OneToMany(mappedBy = "member")
 	private List<MemberGroup> memberGroups;
+
+	@OneToMany(mappedBy = "member")
+	private List<ScheduleInfo> scheduleInfos;
+
+	@OneToMany(mappedBy = "member")
+	private List<Label> labels;
 
 	public WeatherRegion getWeatherRegion() {
 		return Arrays.stream(CalendarTimeZone.values())

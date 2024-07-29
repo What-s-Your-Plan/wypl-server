@@ -139,30 +139,11 @@ public enum ScheduleFixture {
 	}
 
 	public Schedule toSchedule() {
-		return Schedule.builder()
-			.title(title)
-			.description(description)
-			.category(category)
-			.startDate(startDate)
-			.endDate(endDate)
-			.repetition(repetition)
-			.label(label)
-			.groupId(groupId)
-			.build();
+		return null;
 	}
 
 	public Schedule toScheduleWithLabel(int id, Label label) {
-		return Schedule.builder()
-			.scheduleId(id)
-			.title(title)
-			.description(description)
-			.category(category)
-			.startDate(startDate)
-			.endDate(endDate)
-			.repetition(repetition)
-			.label(label)
-			.groupId(groupId)
-			.build();
+		return null;
 	}
 
 }

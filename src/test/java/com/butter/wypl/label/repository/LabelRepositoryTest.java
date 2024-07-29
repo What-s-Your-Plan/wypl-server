@@ -43,7 +43,7 @@ public class LabelRepositoryTest {
 		assertThat(savedLabel.getLabelId()).isGreaterThan(0);
 		assertThat(savedLabel.getTitle()).isEqualTo(label.getTitle());
 		assertThat(savedLabel.getColor()).isEqualTo(label.getColor());
-		assertThat(savedLabel.getMemberId()).isEqualTo(label.getMemberId());
+		assertThat(savedLabel.getMember().getId()).isEqualTo(label.getMember().getId());
 		assertThat(savedLabel.getCreatedAt()).isBefore(LocalDateTime.now());
 		assertThat(savedLabel.getModifiedAt()).isEqualTo(savedLabel.getCreatedAt());
 		assertThat(savedLabel.getDeletedAt()).isNull();
@@ -81,10 +81,10 @@ public class LabelRepositoryTest {
 		//then
 		assertThat(findLabel).isNotNull();
 		if (findLabel.isPresent()) {
-			assertThat(findLabel.get().getMemberId()).isGreaterThan(0);
+			assertThat(findLabel.get().getMember().getId()).isGreaterThan(0);
 			assertThat(findLabel.get().getTitle()).isEqualTo(label.getTitle());
 			assertThat(findLabel.get().getColor()).isEqualTo(label.getColor());
-			assertThat(findLabel.get().getMemberId()).isEqualTo(label.getMemberId());
+			assertThat(findLabel.get().getMember().getId()).isEqualTo(label.getMember().getId());
 			assertThat(findLabel.get().getCreatedAt()).isBefore(LocalDateTime.now());
 			assertThat(findLabel.get().getModifiedAt()).isEqualTo(savedLabel.getCreatedAt());
 			assertThat(findLabel.get().getDeletedAt()).isNull();
@@ -99,7 +99,7 @@ public class LabelRepositoryTest {
 		labelRepository.save(label);
 
 		//when
-		List<Label> labels = labelRepository.findByMemberId(LabelFixture.EXERCISE_LABEL.toLabel().getMemberId());
+		List<Label> labels = labelRepository.findByMemberId(LabelFixture.EXERCISE_LABEL.toLabel().getMember().getId());
 
 		//then
 		assertThat(labels).isNotNull();

@@ -7,14 +7,7 @@ import com.butter.wypl.sidetab.domain.embedded.DDayWidget;
 import com.butter.wypl.sidetab.domain.embedded.GoalWidget;
 import com.butter.wypl.sidetab.domain.embedded.MemoWidget;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapsId;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,6 +19,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(name = "sidetab_tbl")
 public class SideTab {
 	@Id
 	@Column(name = "member_id")

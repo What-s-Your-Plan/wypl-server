@@ -1,5 +1,6 @@
 package com.butter.wypl.group.controller;
 
+import com.butter.wypl.group.data.response.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,12 +20,6 @@ import com.butter.wypl.group.data.request.GroupMemberColorUpdateRequest;
 import com.butter.wypl.group.data.request.GroupMemberInviteRequest;
 import com.butter.wypl.group.data.request.GroupUpdateRequest;
 import com.butter.wypl.group.data.request.MemberIdRequest;
-import com.butter.wypl.group.data.response.FindGroupMembersResponse;
-import com.butter.wypl.group.data.response.FindGroupsResponse;
-import com.butter.wypl.group.data.response.GroupIdResponse;
-import com.butter.wypl.group.data.response.GroupMemberColorUpdateResponse;
-import com.butter.wypl.group.data.response.GroupResponse;
-import com.butter.wypl.group.data.response.MemberIdResponse;
 import com.butter.wypl.group.service.GroupLoadService;
 import com.butter.wypl.group.service.GroupModifyService;
 

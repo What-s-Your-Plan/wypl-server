@@ -11,13 +11,15 @@ public record ScheduleUpdateRequest(
 	String title,
 	String description,
 
-	@JsonProperty("start_date")
-	LocalDateTime startDate,
+	@JsonProperty("start_datetime")
+	LocalDateTime startDateTime,
 
-	@JsonProperty("end_date")
-	LocalDateTime endDate,
+	@JsonProperty("end_datetime")
+	LocalDateTime endDateTime,
+
 	@JsonProperty("modification_type")
 	ModificationType modificationType,
+
 	RepetitionRequest repetition,
 
 	@JsonProperty("label_id")

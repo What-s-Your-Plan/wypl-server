@@ -40,18 +40,6 @@ public record ScheduleDetailResponse(
 		Schedule schedule,
 		List<Member> members
 	) {
-		return new ScheduleDetailResponse(
-			schedule.getScheduleId(),
-			schedule.getTitle(),
-			schedule.getDescription(),
-			schedule.getStartDate(),
-			schedule.getEndDate(),
-			schedule.getCategory(),
-			schedule.getGroupId(),
-			(schedule.getRepetition() == null) ? null : RepetitionResponse.from(schedule.getRepetition()),
-			(schedule.getLabel() == null) ? null : LabelResponse.from(schedule.getLabel()),
-			members.size(),
-			MemberResponse.from(members)
-		);
+		return null;
 	}
 }
